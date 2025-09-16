@@ -1,0 +1,19 @@
+# Database Configuration
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=obe_system
+DB_USER=obe_user
+DB_PASSWORD=obe_password123
+
+# Server Configuration
+PORT=5000
+NODE_ENV=development
+
+# JWT Configuration
+JWT_SECRET=obe_system_jwt_secret_key_2024_change_this_in_production
+JWT_EXPIRE=7d
+
+# File Upload Configuration
+UPLOAD_PATH=./uploads
+MAX_FILE_SIZE=5242880
+

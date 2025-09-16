@@ -1,0 +1,610 @@
+/* Faculty Profile Modal Styles - Corporate Professional Design */
+.faculty-profile-page {
+  min-height: 100vh;
+  background-color: #ffffff;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+/* Faculty Wizard Stepper */
+.faculty-wizard-stepper {
+  background: #ffffff;
+  padding: 16px 24px;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.faculty-stepper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faculty-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  flex: 1;
+  max-width: 100px;
+}
+
+.faculty-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 18px;
+  left: 50px;
+  right: -24px;
+  height: 2px;
+  background: #e5e7eb;
+  z-index: 1;
+}
+
+.faculty-step.completed:not(:last-child)::after {
+  background: #10b981;
+}
+
+.faculty-step-number {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 12px;
+  margin-bottom: 4px;
+  z-index: 2;
+  position: relative;
+  transition: all 0.3s ease;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.faculty-step.active .faculty-step-number {
+  background: #2563eb;
+  color: white;
+}
+
+.faculty-step.completed .faculty-step-number {
+  background: #10b981;
+  color: white;
+}
+
+.faculty-step-icon {
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.faculty-step-title {
+  font-size: 10px;
+  font-weight: 500;
+  color: #6b7280;
+  text-align: center;
+  line-height: 1.2;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.faculty-step.active .faculty-step-title {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.faculty-step.completed .faculty-step-title {
+  color: #10b981;
+  font-weight: 600;
+}
+
+/* Page Header */
+.page-header {
+  margin-bottom: 24px;
+  padding: 0 0 16px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.page-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 8px 0;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.page-header p {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.5;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+/* Stepper Container */
+.stepper-container {
+  background: #ffffff;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.stepper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  flex: 1;
+  max-width: 100px;
+}
+
+.step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 18px;
+  left: 50px;
+  right: -32px;
+  height: 2px;
+  background: #e5e7eb;
+  z-index: 1;
+}
+
+.step.completed:not(:last-child)::after {
+  background: #10b981;
+}
+
+.step-number {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 6px;
+  z-index: 2;
+  position: relative;
+  transition: all 0.3s ease;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.step.active .step-number {
+  background: #2563eb;
+  color: white;
+}
+
+.step.completed .step-number {
+  background: #10b981;
+  color: white;
+}
+
+.step-icon {
+  font-size: 16px;
+  margin-bottom: 3px;
+}
+
+.step-title {
+  font-size: 11px;
+  font-weight: 500;
+  color: #6b7280;
+  text-align: center;
+  line-height: 1.2;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.step.active .step-title {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.step.completed .step-title {
+  color: #10b981;
+  font-weight: 600;
+}
+
+/* Form Container */
+.form-container {
+  background: #ffffff;
+  margin: 12px 24px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
+.step-content {
+  padding: 20px;
+}
+
+/* Profile Photo Section */
+.profile-photo-section {
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.profile-photo-section h3 {
+  margin: 0 0 8px 0;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.profile-photo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.profile-photo-placeholder {
+  width: 100px;
+  height: 100px;
+  border: 2px dashed #d1d5db;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9fafb;
+  overflow: hidden;
+  position: relative;
+}
+
+.profile-photo-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.profile-photo-icon {
+  font-size: 40px;
+  color: #9ca3af;
+}
+
+.change-profile-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.change-profile-btn:hover {
+  background: #1d4ed8;
+}
+
+/* Form Section */
+.form-section h3 {
+  margin: 0 0 12px 0;
+  color: #1f2937;
+  font-size: 15px;
+  font-weight: 600;
+  border-bottom: 2px solid #2563eb;
+  padding-bottom: 4px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.subsection h4 {
+  margin: 0 0 8px 0;
+  color: #dc2626;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+/* Form Layout */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 4px;
+  font-weight: 500;
+  color: #374151;
+  font-size: 13px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.form-group label.required::after {
+  content: ' *';
+  color: #dc2626;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  transition: border-color 0.2s ease;
+  background: #ffffff;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+.form-group input.error,
+.form-group select.error,
+.form-group textarea.error {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+/* Error Messages */
+.error-message {
+  color: #dc2626;
+  font-size: 11px;
+  margin-top: 4px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+/* Special Buttons */
+.manage-designation-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 10px;
+  margin-top: 4px;
+  transition: all 0.2s ease;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.manage-designation-btn:hover {
+  background: #1d4ed8;
+}
+
+.add-phd-guidance-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.add-phd-guidance-btn:hover {
+  background: #059669;
+}
+
+/* Form Actions */
+.form-actions {
+  background: #f8fafc;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #e5e7eb;
+}
+
+.btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: #6b7280;
+  color: white;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #4b5563;
+}
+
+.btn-primary {
+  background: #2563eb;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.btn-success {
+  background: #10b981;
+  color: white;
+}
+
+.btn-success:hover:not(:disabled) {
+  background: #059669;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .page-header h1 {
+    font-size: 20px;
+  }
+  
+  .page-header p {
+    font-size: 13px;
+  }
+
+  .stepper-container {
+    padding: 16px 20px;
+  }
+
+  .stepper {
+    gap: 20px;
+  }
+
+  .step {
+    max-width: 80px;
+  }
+
+  .step:not(:last-child)::after {
+    right: -20px;
+  }
+
+  .step-title {
+    font-size: 10px;
+  }
+
+  .form-container {
+    margin: 8px 16px;
+  }
+
+  .step-content {
+    padding: 16px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .form-actions {
+    padding: 12px 16px;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header {
+    margin-bottom: 20px;
+  }
+  
+  .page-header h1 {
+    font-size: 18px;
+  }
+  
+  .page-header p {
+    font-size: 12px;
+  }
+
+  .stepper {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .step:not(:last-child)::after {
+    display: none;
+  }
+
+  .step-number {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .step-icon {
+    font-size: 14px;
+  }
+
+  .step-title {
+    font-size: 10px;
+  }
+}
+
+/* Professional Corporate Enhancements */
+.faculty-profile-page {
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+}
+
+.form-container {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.stepper-container {
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Input Focus States */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  outline: none;
+}
+
+/* Button Hover Effects */
+.btn {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Professional Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+/* Clean Spacing */
+.form-section {
+  margin-bottom: 20px;
+}
+
+.form-section:last-child {
+  margin-bottom: 0;
+}

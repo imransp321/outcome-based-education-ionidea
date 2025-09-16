@@ -1,0 +1,317 @@
+/* Grid Page Styles */
+.grid-page {
+  padding: 0;
+  background-color: transparent;
+  min-height: auto;
+  width: 100%;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.page-header {
+  margin-bottom: 32px;
+  padding: 0 0 16px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.page-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 8px 0;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.page-header p {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.5;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+/* Curriculum Selection Header */
+.curriculum-selection-header {
+  background-color: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+}
+
+.curriculum-selection-header .curriculum-dropdown-full {
+  margin-left: -4px;
+  margin-right: -4px;
+  width: calc(100% + 8px);
+}
+
+.curriculum-selection-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.curriculum-selection-container .business-form-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  margin: 0;
+  white-space: nowrap;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  min-width: 80px;
+}
+
+.curriculum-selection-container .business-form-input {
+  min-width: 200px;
+  max-width: 300px;
+  flex: 1;
+  font-size: 16px;
+  padding: 12px 16px;
+  height: auto;
+}
+
+/* Common Curriculum Batch Dropdown Styles */
+.curriculum-batch-dropdown {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.curriculum-batch-dropdown .business-form-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  margin: 0 0 8px 0;
+  white-space: nowrap;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  display: block;
+}
+
+.curriculum-batch-dropdown .business-form-input {
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  height: 32px !important;
+  padding: 6px 12px !important;
+  font-size: 14px !important;
+  box-sizing: border-box !important;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: #374151;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.curriculum-batch-dropdown .business-form-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.curriculum-batch-dropdown .business-form-input:hover {
+  border-color: #9ca3af;
+}
+
+/* Full width curriculum dropdown (legacy support) */
+.curriculum-dropdown-full {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.curriculum-dropdown-full-width {
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  height: 32px !important;
+  padding: 6px 12px !important;
+  font-size: 14px !important;
+  box-sizing: border-box !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .page-header {
+    margin-bottom: 28px;
+  }
+  
+  .page-header h1 {
+    font-size: 20px;
+  }
+  
+  .page-header p {
+    font-size: 13px;
+  }
+  
+  .curriculum-selection-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .curriculum-selection-container .business-form-input {
+    min-width: 100%;
+    max-width: 100%;
+    font-size: 15px;
+    padding: 10px 14px;
+  }
+  
+  .curriculum-selection-container .business-form-label {
+    min-width: auto;
+  }
+  
+  .curriculum-dropdown-full {
+    margin-bottom: 8px;
+  }
+  
+  .curriculum-dropdown-full-width {
+    height: 30px !important;
+    padding: 5px 10px !important;
+    font-size: 13px !important;
+  }
+  
+  .curriculum-batch-dropdown .business-form-input {
+    height: 30px !important;
+    padding: 5px 10px !important;
+    font-size: 13px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header {
+    margin-bottom: 24px;
+  }
+  
+  .page-header h1 {
+    font-size: 18px;
+  }
+  
+  .page-header p {
+    font-size: 12px;
+  }
+  
+  .curriculum-selection-header {
+    padding: 12px 16px;
+    margin-bottom: 16px;
+  }
+  
+  .curriculum-selection-container .business-form-label {
+    font-size: 13px;
+  }
+  
+  .curriculum-selection-container .business-form-input {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+  
+  .curriculum-selection-container .business-form-label {
+    min-width: auto;
+  }
+  
+  .curriculum-dropdown-full {
+    margin-bottom: 6px;
+  }
+  
+  .curriculum-dropdown-full-width {
+    height: 28px !important;
+    padding: 4px 8px !important;
+    font-size: 12px !important;
+  }
+  
+  .curriculum-batch-dropdown .business-form-input {
+    height: 28px !important;
+    padding: 4px 8px !important;
+    font-size: 12px !important;
+  }
+}
+
+/* Password Reset Section Styles */
+.password-reset-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.password-reset-note {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 0;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.password-reset-container .modal-btn {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.password-reset-container .modal-btn:hover {
+  background-color: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+/* Import/Export Button Hover Styles */
+.grid-add-button[style*="background-color: #d1d5db"]:hover {
+  background-color: #6b7280 !important;
+  border-color: #4b5563 !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(107, 114, 128, 0.3);
+}
+
+/* Mode Type Tags */
+.mode-type-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.mode-type-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.mode-type-tag-blue {
+  background-color: #dbeafe;
+  color: #1e40af;
+  border-color: #bfdbfe;
+}
+
+.mode-type-tag-green {
+  background-color: #dcfce7;
+  color: #166534;
+  border-color: #bbf7d0;
+}
+
+.mode-type-tag-purple {
+  background-color: #f3e8ff;
+  color: #7c3aed;
+  border-color: #e9d5ff;
+}
+
+.mode-type-tag-gray {
+  background-color: #f3f4f6;
+  color: #374151;
+  border-color: #d1d5db;
+}
+
+.mode-type-tag:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

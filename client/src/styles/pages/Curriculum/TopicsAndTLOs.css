@@ -1,0 +1,316 @@
+/* Topics and TLOs Page - Custom styles that extend Grid.css and Modal.css */
+
+/* Page Header */
+.grid-page .page-header {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.grid-page .page-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 8px 0;
+}
+
+.grid-page .page-header p {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Clean Filter Card - Matching the reference image exactly */
+.filter-card {
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: none;
+}
+
+.filter-row {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: stretch;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.filter-group label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #333333;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.filter-select {
+  width: 100%;
+  padding: 12px 40px 12px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 400;
+  background: #ffffff;
+  color: #374151;
+  transition: border-color 0.2s ease;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%236b7280' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,8 10,12 14,8'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.filter-select:hover {
+  border-color: #9ca3af;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #6b7280;
+  box-shadow: none;
+}
+
+.filter-select:disabled {
+  background: #f9fafb;
+  color: #9ca3af;
+  cursor: not-allowed;
+  border-color: #e5e7eb;
+}
+
+.filter-select option {
+  padding: 8px 12px;
+  color: #374151;
+  font-weight: 400;
+  background: #ffffff;
+}
+
+/* Simple, clean styling matching the reference image */
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .filter-card {
+    padding: 20px;
+  }
+  
+  .filter-row {
+    gap: 16px;
+  }
+}
+
+/* Topic-specific table cell styles */
+.grid-table .topic-title {
+  min-width: 200px;
+}
+
+.grid-table .topic-title-text {
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 4px;
+}
+
+.grid-table .topic-meta {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.grid-table .topic-content {
+  min-width: 300px;
+  max-width: 400px;
+}
+
+.grid-table .content-preview {
+  line-height: 1.4;
+  color: #4b5563;
+}
+
+.grid-table .topic-hours {
+  text-align: center;
+  font-weight: 600;
+  color: #059669;
+  min-width: 80px;
+}
+
+.grid-table .delivery-methods {
+  min-width: 150px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* Modal Form Styling */
+.modal-body .form-group {
+  margin-bottom: 20px;
+}
+
+.modal-body .form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.modal-body .form-control {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  transition: border-color 0.2s ease;
+  background: #ffffff;
+}
+
+.modal-body .form-control:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.modal-body .form-control:disabled {
+  background: #f9fafb;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.modal-body textarea.form-control {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.modal-body select.form-control {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+/* Delivery Methods Tags */
+.delivery-methods-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+}
+
+.delivery-method-tag {
+  display: inline-block;
+  padding: 4px 8px;
+  background: #e0f2fe;
+  color: #0277bd;
+  border: 1px solid #b3e5fc;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.delivery-method-tag:hover {
+  background: #b3e5fc;
+  border-color: #81d4fa;
+  transform: translateY(-1px);
+}
+
+.delivery-method-tag.empty {
+  background: #f5f5f5;
+  color: #9e9e9e;
+  border-color: #e0e0e0;
+}
+
+.delivery-method-tag.empty:hover {
+  background: #eeeeee;
+  border-color: #bdbdbd;
+  transform: none;
+}
+
+/* Specific delivery method tag colors */
+.delivery-method-tag.class-room {
+  background: #e8f5e8;
+  color: #2e7d32;
+  border-color: #c8e6c9;
+}
+
+.delivery-method-tag.laboratory {
+  background: #fff3e0;
+  color: #ef6c00;
+  border-color: #ffcc02;
+}
+
+.delivery-method-tag.case-study {
+  background: #f3e5f5;
+  color: #7b1fa2;
+  border-color: #ce93d8;
+}
+
+.delivery-method-tag.project {
+  background: #e0f2f1;
+  color: #00695c;
+  border-color: #a7f3d0;
+}
+
+.delivery-method-tag.seminar {
+  background: #fce4ec;
+  color: #c2185b;
+  border-color: #f8bbd9;
+}
+
+.delivery-method-tag.workshop {
+  background: #fff8e1;
+  color: #f57c00;
+  border-color: #ffd54f;
+}
+
+.delivery-method-tag.tutorial {
+  background: #e3f2fd;
+  color: #1976d2;
+  border-color: #90caf9;
+}
+
+
+/* Modal warning text */
+.modal-body .warning-text {
+  color: #dc2626;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .filter-row {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .filter-group {
+    min-width: 100%;
+  }
+
+  .delivery-methods-container {
+    gap: 2px;
+  }
+
+  .delivery-method-tag {
+    font-size: 11px;
+    padding: 3px 6px;
+  }
+
+}

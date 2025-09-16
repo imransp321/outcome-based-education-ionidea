@@ -1,0 +1,75 @@
+/* Toggle Button Component Styles */
+.sidebar-toggle-btn {
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.sidebar-toggle-btn:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.toggle-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.toggle-icon svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s ease;
+}
+
+.sidebar-toggle-btn:hover .toggle-icon {
+  transform: scale(1.1);
+}
+
+.sidebar-toggle-btn:hover .toggle-icon svg {
+  transform: rotate(180deg);
+}
+
+/* Responsive Toggle Styles */
+@media (max-width: 768px) {
+  .sidebar-toggle-btn {
+    padding: 6px;
+  }
+  
+  .toggle-icon {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .toggle-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar-toggle-btn {
+    padding: 4px;
+  }
+  
+  .toggle-icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .toggle-icon svg {
+    width: 12px;
+    height: 12px;
+  }
+}

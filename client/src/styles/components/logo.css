@@ -1,0 +1,105 @@
+/* Logo Component Styles */
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-image {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: center;
+}
+
+.logo-main {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+  line-height: 1.2;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.logo-subtitle {
+  font-size: 14px;
+  font-weight: 400;
+  color: #6b7280;
+  line-height: 1.2;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.logo-circle {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+}
+
+.logo-text-initials {
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive Logo Styles */
+@media (max-width: 768px) {
+  .logo-image {
+    height: 45px;
+  }
+  
+  .logo-main {
+    font-size: 18px;
+  }
+  
+  .logo-subtitle {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-image {
+    height: 40px;
+  }
+  
+  .logo-main {
+    font-size: 16px;
+  }
+  
+  .logo-subtitle {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .logo-image {
+    height: 35px;
+  }
+  
+  .logo-main {
+    font-size: 15px;
+  }
+  
+  .logo-subtitle {
+    font-size: 11px;
+  }
+}

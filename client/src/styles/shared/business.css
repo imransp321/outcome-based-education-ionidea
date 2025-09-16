@@ -1,0 +1,988 @@
+/* Business Application Core Styles */
+/* This file contains all the common business-related styles used across the application */
+
+/* Global font family for all business elements */
+.business-organisation-page,
+.business-stat-item,
+.business-stat-number,
+.business-stat-label,
+.business-btn,
+.business-alert,
+.business-form-title h2,
+.business-form-title p,
+.business-form-section-title,
+.business-form-label,
+.business-form-input,
+.business-form-textarea,
+.business-form-help,
+.business-form-error,
+.business-form-checkbox label,
+.business-grid-header,
+.business-grid-cell,
+.business-cell-title,
+.business-cell-text,
+.business-loading-container,
+.business-empty-state h3,
+.business-empty-state p,
+.business-pagination-info {
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+/* Business Page Layout */
+.business-organisation-page {
+  padding: 24px;
+  background-color: #f8fafc;
+  min-height: 100vh;
+}
+
+.business-organisation-page * {
+  box-sizing: border-box;
+}
+
+/* Business Stats */
+.business-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.business-stat-item {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.business-stat-number {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.business-stat-label {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+/* Business Buttons */
+.business-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.business-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.business-btn-primary {
+  background-color: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
+
+.business-btn-primary:hover:not(:disabled) {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+.business-btn-secondary {
+  background-color: #6b7280;
+  color: white;
+  border-color: #6b7280;
+}
+
+.business-btn-secondary:hover:not(:disabled) {
+  background-color: #4b5563;
+  border-color: #4b5563;
+}
+
+.business-btn-danger {
+  background-color: #ef4444;
+  color: white;
+  border-color: #ef4444;
+}
+
+.business-btn-danger:hover:not(:disabled) {
+  background-color: #dc2626;
+  border-color: #dc2626;
+}
+
+.business-btn-sm {
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+/* Business Alerts */
+.business-alert {
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.business-alert-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.business-alert-success {
+  background-color: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.business-alert-error {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.business-alert-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.business-alert-text {
+  flex: 1;
+}
+
+.business-alert-close {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.business-alert-close:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Modal styles are now handled by modals.css - no custom modal CSS needed here */
+
+.business-form-header {
+  padding: 24px 24px 0;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.business-form-title h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 8px 0;
+}
+
+.business-form-title p {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.business-btn-close {
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.business-btn-close:hover {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.business-form-content {
+  padding: 0 24px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.business-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.business-form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.business-form-section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.business-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Ensure form groups take full width of their grid cell */
+.business-form-grid .business-form-group {
+  width: 100%;
+  min-width: 0; /* Prevent overflow */
+}
+
+/* Force 2-column layout in modals */
+.modal .business-form-grid,
+.business-form-container .business-form-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 60px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Ensure form inputs have proper spacing in 2-column layout */
+.modal .business-form-group,
+.business-form-container .business-form-group {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+.business-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.business-form-group-full {
+  grid-column: 1 / -1;
+}
+
+.business-form-help {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+.business-form-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  display: block;
+}
+
+.business-form-label .required,
+.business-form-required {
+  color: #dc2626 !important; /* Red color */
+  font-weight: 600;
+  margin-left: 2px;
+}
+
+/* Business Form Input Wrapper with Icons */
+.business-form-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.business-form-input-wrapper .business-form-input {
+  width: 100%;
+  padding: 10px 12px 10px 40px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #374151;
+  background-color: white;
+  transition: all 0.2s ease;
+}
+
+.business-form-input-wrapper .business-form-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.business-form-input-wrapper .business-form-input::placeholder {
+  color: #9ca3af;
+}
+
+.business-form-input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Business Form Textarea Wrapper with Icons */
+.business-form-textarea-wrapper {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+}
+
+.business-form-textarea-wrapper .business-form-textarea {
+  width: 100%;
+  padding: 10px 12px 10px 40px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #374151;
+  background-color: white;
+  transition: all 0.2s ease;
+  resize: vertical;
+  min-height: 100px;
+}
+
+.business-form-textarea-wrapper .business-form-textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.business-form-textarea-wrapper .business-form-textarea::placeholder {
+  color: #9ca3af;
+}
+
+.business-form-textarea-icon {
+  position: absolute;
+  left: 12px;
+  top: 16px;
+  color: #6b7280;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Business Form Validation Error Styles */
+.business-form-input-error {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+}
+
+.business-form-input-wrapper.business-form-input-error {
+  border-color: #ef4444;
+}
+
+.business-form-input-wrapper.business-form-input-error .business-form-input {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.business-form-input-wrapper.business-form-input-error .business-form-input:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.business-form-error {
+  color: #ef4444;
+  font-size: 12px;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.business-form-error::before {
+  content: "⚠";
+  font-size: 14px;
+}
+
+/* Success Popup Styles - Moved to ValidationPopup.css */
+/* These styles are now handled by the unified ValidationPopup component */
+
+/* Error Popup Styles - Moved to ValidationPopup.css */
+/* These styles are now handled by the unified ValidationPopup component */
+
+/* Logo Loading State */
+.logo-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: #6b7280;
+}
+
+.logo-loading-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #e5e7eb;
+  border-top: 2px solid #3b82f6;
+  border-radius: 50%;
+  animation: logoSpin 1s linear infinite;
+  margin-bottom: 8px;
+}
+
+@keyframes logoSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.logo-loading p {
+  margin: 0;
+  font-size: 12px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+/* Logo Upload Area Styles */
+.logo-upload-area {
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #f9fafb;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-upload-area:hover {
+  border-color: #3b82f6;
+  background: #f0f9ff;
+}
+
+.logo-upload-area.drag-over {
+  border-color: #3b82f6;
+  background: #eff6ff;
+  transform: scale(1.02);
+}
+
+.upload-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-preview-container {
+  position: relative;
+  display: inline-block;
+}
+
+.logo-preview {
+  max-width: 200px;
+  max-height: 120px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.logo-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.logo-preview-container:hover .logo-overlay {
+  opacity: 1;
+}
+
+.upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: #6b7280;
+}
+
+.upload-text {
+  text-align: center;
+}
+
+.upload-title {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0 0 4px 0;
+  color: #374151;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.upload-subtitle {
+  font-size: 12px;
+  margin: 0;
+  color: #9ca3af;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.file-input-hidden {
+  display: none;
+}
+
+.upload-info {
+  margin-top: 8px;
+  text-align: center;
+}
+
+.upload-hint {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 0;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+/* Success Popup Progress Bar - Moved to ValidationPopup.css */
+/* These styles are now handled by the unified ValidationPopup component */
+
+.business-form-input,
+.business-form-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #374151;
+  background-color: white;
+  transition: all 0.2s ease;
+}
+
+.business-form-input:focus,
+.business-form-textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.business-form-input::placeholder,
+.business-form-textarea::placeholder {
+  color: #9ca3af;
+}
+
+.business-form-input[type="select"],
+.business-form-input select,
+select.business-form-input {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 8px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-right: 32px;
+  appearance: none;
+}
+
+.business-form-input option {
+  padding: 8px 12px;
+  color: #374151;
+  background-color: white;
+}
+
+.business-form-input option:hover {
+  background-color: #f3f4f6;
+}
+
+.business-form-input option:checked,
+.business-form-input option:selected {
+  background-color: #3b82f6;
+  color: white;
+}
+
+select.business-form-input {
+  cursor: pointer;
+}
+
+select.business-form-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.business-form-input:focus,
+.business-form-textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.business-form-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.business-form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Business Data Container */
+.business-data-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.business-data-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+}
+
+.business-data-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.business-search-container {
+  display: flex;
+  align-items: center;
+}
+
+.business-search-form {
+  display: flex;
+  align-items: center;
+}
+
+.business-search-input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.business-search-input-group:focus-within {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.business-search-input-group svg {
+  position: absolute;
+  left: 12px;
+  color: #6b7280;
+  width: 16px;
+  height: 16px;
+}
+
+.business-search-input {
+  padding: 8px 12px 8px 40px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 300px;
+  background-color: #f9fafb;
+  transition: all 0.2s ease;
+}
+
+.business-search-input::placeholder {
+  color: #9ca3af;
+}
+
+/* Business Data Grid */
+.business-data-grid {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.business-grid-header {
+  display: grid;
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+  font-weight: 600;
+  color: #374151;
+}
+
+.business-grid-row {
+  display: grid;
+  border-bottom: 1px solid #e5e7eb;
+  transition: background-color 0.2s;
+}
+
+.business-grid-row:hover {
+  background-color: #f9fafb;
+}
+
+.business-grid-row:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.business-grid-row:nth-child(even):hover {
+  background-color: #f0f0f0;
+}
+
+.business-grid-row {
+  display: grid;
+}
+
+.business-grid-row:last-child {
+  border-bottom: none;
+}
+
+.business-grid-cell {
+  padding: 16px;
+  border-right: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+}
+
+.business-grid-cell-name {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.business-grid-cell-society {
+  color: #6b7280;
+}
+
+.business-grid-cell-description {
+  color: #6b7280;
+}
+
+.business-grid-cell-mission {
+  color: #6b7280;
+}
+
+.business-grid-cell-role {
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.business-grid-cell-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Business Cell Content */
+.business-cell-title {
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 4px;
+}
+
+.business-cell-text {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.business-cell-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Business Loading States */
+.business-loading-container {
+  text-align: center;
+  padding: 48px 24px;
+  color: #6b7280;
+}
+
+.business-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e5e7eb;
+  border-top: 3px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Business Empty State */
+.business-empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: #6b7280;
+}
+
+.business-empty-icon {
+  margin-bottom: 16px;
+}
+
+.business-empty-state h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #374151;
+}
+
+.business-empty-state p {
+  margin-bottom: 24px;
+}
+
+/* Business Pagination */
+.business-pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background-color: #f9fafb;
+  border-top: 1px solid #e5e7eb;
+}
+
+.business-pagination-info {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.business-pagination-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.business-pagination-pages {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+/* Business Form Error */
+.business-form-error {
+  font-size: 12px;
+  color: #ef4444;
+  margin-top: 4px;
+}
+
+/* Validation message styling */
+.validation-messages {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+}
+
+.validation-messages.error {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #dc2626;
+}
+
+.validation-messages.success {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+  color: #166534;
+}
+
+.validation-messages .message-title {
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.validation-messages .message-list {
+  margin: 0;
+  padding-left: 16px;
+}
+
+.validation-messages .message-list li {
+  margin-bottom: 4px;
+  font-size: 13px;
+}
+
+.business-form-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.business-form-checkbox input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #3b82f6;
+}
+
+.business-form-checkbox label {
+  font-size: 14px;
+  color: #374151;
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .business-form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .business-data-header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+  
+  .business-search-input {
+    width: 100%;
+  }
+  
+  .business-grid-header,
+  .business-grid-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .business-grid-cell {
+    padding: 8px 12px;
+    border-right: none;
+    border-bottom: 1px solid #f3f4f6;
+  }
+  
+  .business-grid-cell:last-child {
+    border-bottom: none;
+  }
+  
+  .business-cell-actions {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}

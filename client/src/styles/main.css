@@ -1,0 +1,65 @@
+/* Main CSS File - Imports all separated styles */
+
+/* Base Styles */
+@import './base/reset.css';
+@import './base/typography.css';
+@import './base/utilities.css';
+
+/* Layout Styles */
+@import './layout/layout.css';
+@import './layout/header.css';
+@import './layout/sidebar.css';
+
+/* Component Styles */
+@import './components/buttons.css';
+@import './components/forms.css';
+@import './components/tables.css';
+@import './components/modals.css';
+@import './components/cards.css';
+@import './components/logo.css';
+@import './components/dropdown.css';
+@import './components/menu.css';
+@import './components/toggle.css';
+@import './components/grid.css';
+@import './components/tabs.css';
+
+/* Page Styles */
+@import './pages/Dashboard/Dashboard.css';
+@import './pages/Configuration/Grid.css';
+
+/* Configuration Page Styles - All custom CSS files have been removed and consolidated into Grid.css and modals.css */
+
+/* Curriculum Design Page Styles */
+@import './pages/Curriculum/CourseList.css';
+@import './pages/Curriculum/CurriculumSettings.css';
+
+/* Reports Page Styles */
+@import './pages/Reports/AcademicReports.css';
+@import './pages/Reports/AssessmentReports.css';
+@import './pages/Reports/AnalyticsDashboard.css';
+
+/* Assessment Planning Page Styles */
+@import './pages/Assessment/AssessmentMethods.css';
+@import './pages/Assessment/RubricDesign.css';
+@import './pages/Assessment/EvaluationCriteria.css';
+
+/* Attainment Analysis Page Styles */
+@import './pages/Attainment/POAttainment.css';
+@import './pages/Attainment/COAttainment.css';
+@import './pages/Attainment/GapAnalysis.css';
+
+/* Surveys Page Styles */
+@import './pages/Surveys/StudentFeedback.css';
+@import './pages/Surveys/FacultyFeedback.css';
+@import './pages/Surveys/StakeholderSurveys.css';
+
+/* Utilities Page Styles */
+@import './pages/Utilities/ImportExport.css';
+@import './pages/Utilities/SystemSettings.css';
+@import './pages/Utilities/BackupRestore.css';
+
+/* Component-specific CSS files */
+@import './components/MessageModal.css';
+
+/* Shared Business Styles */
+@import './shared/business.css';

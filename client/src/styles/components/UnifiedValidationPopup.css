@@ -1,0 +1,336 @@
+/* Unified Validation Popup Styles - Matching Image Design */
+
+/* Overlay */
+.unified-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 9999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Popup Container */
+.unified-popup {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  z-index: 10000000;
+  margin: 0;
+  border: 1px solid #e5e7eb;
+  animation: slideIn 0.3s ease-out;
+  overflow: hidden;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Header */
+.unified-popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f8fafc;
+}
+
+.unified-popup-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.unified-popup-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.unified-popup-error .unified-popup-icon {
+  color: #dc2626;
+}
+
+.unified-popup-success .unified-popup-icon {
+  color: #16a34a;
+}
+
+.unified-popup-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  line-height: 1.4;
+}
+
+.unified-popup-error .unified-popup-title {
+  color: #dc2626;
+}
+
+.unified-popup-success .unified-popup-title {
+  color: #16a34a;
+}
+
+.unified-popup-close {
+  background: none;
+  border: none;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #6b7280;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.unified-popup-close:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+/* Content */
+.unified-popup-content {
+  padding: 20px;
+  background: #ffffff;
+}
+
+.unified-popup-message {
+  font-size: 14px;
+  color: #374151;
+  margin: 0;
+  line-height: 1.5;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  white-space: pre-line;
+  word-wrap: break-word;
+}
+
+/* Footer */
+.unified-popup-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 20px;
+  background: #f8fafc;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Buttons */
+.unified-popup-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  min-width: 80px;
+  text-decoration: none;
+}
+
+.unified-popup-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.unified-popup-btn-primary {
+  background: #dc2626;
+  color: #ffffff;
+  border-color: #dc2626;
+}
+
+.unified-popup-btn-primary:hover:not(:disabled) {
+  background: #b91c1c;
+  border-color: #b91c1c;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(220, 38, 38, 0.3);
+}
+
+.unified-popup-btn-secondary {
+  background: #ffffff;
+  color: #6b7280;
+  border-color: #d1d5db;
+}
+
+.unified-popup-btn-secondary:hover:not(:disabled) {
+  background: #f9fafb;
+  color: #374151;
+  border-color: #9ca3af;
+}
+
+.unified-popup-btn:active {
+  transform: translateY(0);
+}
+
+/* Success Popup Specific Styles */
+.unified-popup-success .unified-popup-btn-primary {
+  background: #16a34a;
+  border-color: #16a34a;
+}
+
+.unified-popup-success .unified-popup-btn-primary:hover:not(:disabled) {
+  background: #15803d;
+  border-color: #15803d;
+  box-shadow: 0 4px 8px rgba(22, 163, 74, 0.3);
+}
+
+/* Progress Bar */
+.unified-popup-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+
+.unified-popup-progress-bar {
+  height: 100%;
+  background: #16a34a;
+  width: 100%;
+  animation: progressBar 3s linear forwards;
+}
+
+@keyframes progressBar {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+/* Error Highlighting for Form Controls */
+.form-control-error,
+.book-chapter-input-error,
+.modal-form-input-error,
+.business-form-input-error {
+  border-color: #dc2626 !important;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1) !important;
+  background-color: #fef2f2 !important;
+}
+
+.form-control-error:focus,
+.book-chapter-input-error:focus,
+.modal-form-input-error:focus,
+.business-form-input-error:focus {
+  border-color: #dc2626 !important;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2) !important;
+}
+
+/* Error Message Styles */
+.error-message,
+.book-chapter-error-message,
+.modal-form-error-message,
+.business-form-error-message {
+  color: #dc2626;
+  font-size: 12px;
+  margin-top: 4px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.error-message::before,
+.book-chapter-error-message::before,
+.modal-form-error-message::before,
+.business-form-error-message::before {
+  content: '⚠';
+  font-size: 12px;
+  color: #dc2626;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .unified-popup-overlay {
+    padding: 16px;
+  }
+  
+  .unified-popup {
+    max-width: 100%;
+  }
+  
+  .unified-popup-header,
+  .unified-popup-content,
+  .unified-popup-footer {
+    padding: 16px;
+  }
+  
+  .unified-popup-title {
+    font-size: 15px;
+  }
+  
+  .unified-popup-message {
+    font-size: 13px;
+  }
+  
+  .unified-popup-btn {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+  
+  .unified-popup-footer {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .unified-popup-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .unified-popup {
+    max-width: 320px;
+    margin: 0 16px;
+  }
+  
+  .unified-popup-header,
+  .unified-popup-content,
+  .unified-popup-footer {
+    padding: 12px;
+  }
+}
+
+/* Body scroll lock */
+body.unified-popup-open {
+  overflow: hidden;
+}

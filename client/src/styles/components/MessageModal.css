@@ -1,0 +1,208 @@
+/* Message Modal Styles */
+.message-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.message-modal {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow: hidden;
+  animation: slideIn 0.3s ease-out;
+  position: relative;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.message-modal-content {
+  display: flex;
+  align-items: flex-start;
+  padding: 24px;
+  gap: 16px;
+  position: relative;
+}
+
+.message-modal-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.message-modal-success .message-modal-icon {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+.message-modal-error .message-modal-icon {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.message-modal-warning .message-modal-icon {
+  background: #fffbeb;
+  color: #d97706;
+}
+
+.message-modal-info .message-modal-icon {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.message-modal-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.message-modal-title {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.message-modal-success .message-modal-title {
+  color: #16a34a;
+}
+
+.message-modal-error .message-modal-title {
+  color: #dc2626;
+}
+
+.message-modal-warning .message-modal-title {
+  color: #d97706;
+}
+
+.message-modal-info .message-modal-title {
+  color: #2563eb;
+}
+
+.message-modal-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #374151;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  white-space: pre-line;
+  word-wrap: break-word;
+}
+
+.message-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+.message-modal-close:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.message-modal-close:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .message-modal-overlay {
+    padding: 16px;
+  }
+  
+  .message-modal {
+    max-width: 100%;
+  }
+  
+  .message-modal-content {
+    padding: 20px;
+    gap: 12px;
+  }
+  
+  .message-modal-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .message-modal-title {
+    font-size: 16px;
+  }
+  
+  .message-modal-text {
+    font-size: 13px;
+  }
+}
+
+/* Animation for auto-close */
+.message-modal-auto-close {
+  position: relative;
+  overflow: hidden;
+}
+
+.message-modal-auto-close::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+  animation: progressBar 5s linear forwards;
+}
+
+@keyframes progressBar {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}

@@ -1,0 +1,247 @@
+/* Professional Bodies Page Styles */
+
+/* Page Header */
+.page-header {
+  margin-bottom: 32px;
+}
+
+.page-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1e40af;
+  margin: 0 0 8px 0;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.page-header p {
+  font-size: 16px;
+  color: #6b7280;
+  margin: 0;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+/* Document View Button Styles */
+.document-view-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.document-view-btn:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+}
+
+.document-view-btn:active {
+  transform: translateY(0);
+}
+
+/* No Document Tag */
+.no-document-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f4f6;
+  color: #6b7280;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  min-width: 60px;
+  border: 1px solid #e5e7eb;
+}
+
+/* Popup Button Styles - Moved to ValidationPopup.css */
+/* These styles are now handled by the unified ValidationPopup component */
+
+/* Form Error Styles */
+.book-chapter-error {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+}
+
+.book-chapter-error-message {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #ef4444;
+  font-size: 12px;
+  margin-top: 4px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.book-chapter-error-message svg {
+  flex-shrink: 0;
+}
+
+/* File Upload Styles */
+.book-chapter-upload-area {
+  margin-top: 8px;
+}
+
+.book-chapter-upload-dropzone {
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #f9fafb;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-chapter-upload-dropzone:hover {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+
+.book-chapter-upload-dropzone.book-chapter-drag-over {
+  border-color: #3b82f6;
+  background: #dbeafe;
+}
+
+.book-chapter-upload-content {
+  width: 100%;
+}
+
+.book-chapter-upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.book-chapter-upload-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #374151;
+  margin: 0;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.book-chapter-upload-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.book-chapter-upload-hint {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 8px 0 0 0;
+  text-align: center;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.book-chapter-file-input-hidden {
+  display: none;
+}
+
+.book-chapter-file-preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: #f8fafc;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+}
+
+.book-chapter-file-icon {
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+.book-chapter-file-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.book-chapter-file-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  flex: 1;
+  word-break: break-all;
+}
+
+.book-chapter-btn-sm {
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+.book-chapter-btn-danger {
+  background: #ef4444;
+  color: white;
+  border: 1px solid #ef4444;
+}
+
+.book-chapter-btn-danger:hover {
+  background: #dc2626;
+  border-color: #dc2626;
+}
+
+/* Spinner for loading states */
+.book-chapter-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .page-header h1 {
+    font-size: 24px;
+  }
+  
+  .page-header p {
+    font-size: 14px;
+  }
+  
+  .book-chapter-upload-dropzone {
+    padding: 16px;
+    min-height: 100px;
+  }
+  
+  .book-chapter-file-preview {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .book-chapter-file-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+  }
+}

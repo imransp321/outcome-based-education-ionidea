@@ -1,0 +1,659 @@
+/* Course List - OrganisationDetails Style Replication */
+
+/* Business Organisation Page */
+.business-organisation-page {
+  padding: 24px;
+  background: #f8fafc;
+  min-height: 100vh;
+}
+
+/* Business Alert Messages */
+.business-alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.business-alert-success {
+  background: #f0f9ff;
+  border: 1px solid #0ea5e9;
+  color: #0c4a6e;
+}
+
+.business-alert-error {
+  background: #fef2f2;
+  border: 1px solid #ef4444;
+  color: #991b1b;
+}
+
+.business-alert-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.business-alert-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.business-alert-text {
+  flex: 1;
+}
+
+.business-alert-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.business-alert-close:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Filters Section */
+.business-filters-section {
+  margin-bottom: 24px;
+}
+
+.business-filters {
+  display: flex;
+  gap: 16px;
+  align-items: end;
+  flex-wrap: wrap;
+  padding: 20px 24px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+}
+
+.business-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 200px;
+}
+
+.business-filter-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.business-form-select {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  background: white;
+  color: #374151;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.business-form-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Business Data Container */
+.business-data-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+}
+
+.business-data-header {
+  background: #f8fafc;
+  border-radius: 0;
+  padding: 20px 24px;
+  margin-bottom: 0;
+  box-shadow: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: none;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.business-data-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.business-search-container {
+  flex: 1;
+  max-width: 400px;
+}
+
+.business-search-form {
+  width: 100%;
+}
+
+.business-search-input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.business-search-input-group svg {
+  position: absolute;
+  left: 12px;
+  color: #6b7280;
+  z-index: 1;
+}
+
+.business-search-input {
+  width: 100%;
+  padding: 8px 12px 8px 36px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  background: white;
+  color: #374151;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.business-search-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Business Data Grid */
+.business-data-grid {
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+.business-grid-header {
+  display: flex;
+  background: #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #374151;
+  letter-spacing: 0.025em;
+  text-transform: capitalize;
+}
+
+.business-grid-row {
+  display: flex;
+  border-bottom: 1px solid #f1f5f9;
+  transition: background 0.2s ease;
+  background: #ffffff;
+  min-height: 44px;
+}
+
+.business-grid-row:hover {
+  background: #f8fafc;
+}
+
+.business-grid-row:nth-child(even) {
+  background: #fafbfc;
+}
+
+.business-grid-row:nth-child(even):hover {
+  background: #f1f5f9;
+}
+
+.business-grid-row:last-child {
+  border-bottom: none;
+}
+
+.business-grid-cell {
+  padding: 16px 20px;
+  display: flex;
+  align-items: flex-start;
+  font-size: 12px;
+  border-right: 1px solid #f1f5f9;
+  text-align: left;
+}
+
+.business-grid-cell:last-child {
+  border-right: none;
+}
+
+.business-grid-header .business-grid-cell {
+  padding: 16px 20px;
+  border-right: 1px solid #e2e8f0;
+  font-weight: 700;
+  color: #374151;
+  font-size: 17px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  text-align: left;
+}
+
+.business-grid-header .business-grid-cell:last-child {
+  border-right: none;
+}
+
+.business-cell-title {
+  font-weight: 400;
+  color: #111827;
+  font-size: 12px;
+  text-align: left;
+}
+
+.business-cell-text {
+  font-weight: 400;
+  color: #6b7280;
+  font-size: 12px;
+  text-align: left;
+}
+
+.business-cell-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Grid Column Widths - Course List Specific */
+.business-grid-cell-code {
+  flex: 0 0 100px;
+  min-width: 100px;
+}
+
+.business-grid-cell-title {
+  flex: 2;
+  min-width: 200px;
+}
+
+.business-grid-cell-type {
+  flex: 0 0 120px;
+  min-width: 120px;
+}
+
+.business-grid-cell-hours {
+  flex: 0 0 50px;
+  min-width: 50px;
+  text-align: center;
+}
+
+.business-grid-cell-credits {
+  flex: 0 0 80px;
+  min-width: 80px;
+  text-align: center;
+}
+
+.business-grid-cell-marks {
+  flex: 0 0 80px;
+  min-width: 80px;
+  text-align: center;
+}
+
+.business-grid-cell-owner {
+  flex: 1;
+  min-width: 120px;
+}
+
+.business-grid-cell-reviewer {
+  flex: 1;
+  min-width: 120px;
+}
+
+.business-grid-cell-mode {
+  flex: 0 0 120px;
+  min-width: 120px;
+}
+
+.business-grid-cell-actions {
+  flex: 0 0 180px;
+  min-width: 180px;
+}
+
+/* Loading State */
+.business-loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  background: white;
+}
+
+.business-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #f3f4f6;
+  border-top: 3px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.business-loading-container p {
+  color: #6b7280;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Empty State */
+.business-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  background: white;
+  text-align: center;
+}
+
+.business-empty-icon {
+  color: #9ca3af;
+  margin-bottom: 16px;
+}
+
+.business-empty-state h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 8px 0;
+}
+
+.business-empty-state p {
+  color: #6b7280;
+  font-size: 14px;
+  margin: 0 0 24px 0;
+}
+
+/* Pagination */
+.business-pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  background: #f8fafc;
+  border-top: 1px solid #e5e7eb;
+}
+
+.business-pagination-info {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.business-pagination {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.business-pagination-page {
+  color: #374151;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Form Modal */
+.business-form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.business-form-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.business-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 24px 0 24px;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 24px;
+}
+
+.business-form-title h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 4px 0;
+}
+
+.business-form-title p {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.business-btn-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  transition: background-color 0.2s;
+}
+
+.business-btn-close:hover {
+  background: #f3f4f6;
+}
+
+.business-form-content {
+  padding: 0 24px 24px 24px;
+}
+
+.business-form-section {
+  margin-bottom: 32px;
+}
+
+.business-form-section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 16px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.business-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.business-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.business-form-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.required {
+  color: #ef4444;
+}
+
+.business-form-input {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  background: white;
+  color: #374151;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.business-form-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.business-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 24px;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Buttons */
+.business-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.business-btn-primary {
+  background: #3b82f6;
+  color: white;
+}
+
+.business-btn-primary:hover {
+  background: #2563eb;
+}
+
+.business-btn-secondary {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.business-btn-secondary:hover {
+  background: #e5e7eb;
+}
+
+.business-btn-danger {
+  background: #ef4444;
+  color: white;
+}
+
+.business-btn-danger:hover {
+  background: #dc2626;
+}
+
+.business-btn-sm {
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+.business-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .business-organisation-page {
+    padding: 16px;
+  }
+  
+  .business-filters {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .business-filter-group {
+    min-width: auto;
+  }
+  
+  .business-data-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .business-search-container {
+    max-width: none;
+  }
+  
+  .business-pagination-container {
+    flex-direction: column;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .business-grid-header,
+  .business-grid-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .business-grid-cell {
+    padding: 6px 10px;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  
+  .business-grid-header .business-grid-cell {
+    font-weight: 700;
+    background: #f1f5f9;
+    border-bottom: 1px solid #e2e8f0;
+    color: #374151;
+    font-size: 17px;
+    font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  }
+  
+  .business-form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .business-form-actions {
+    flex-direction: column;
+  }
+}

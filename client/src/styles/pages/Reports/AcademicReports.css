@@ -1,0 +1,48 @@
+/* Academic Reports Styles */
+.academic-reports-page {
+  padding: 0;
+  background-color: transparent;
+  min-height: auto;
+}
+
+.academic-reports-header {
+  margin-bottom: 24px;
+}
+
+.academic-reports-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 8px 0;
+}
+
+.academic-reports-subtitle {
+  font-size: 16px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.academic-reports-content {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.coming-soon {
+  text-align: center;
+  padding: 48px 24px;
+  color: #6b7280;
+}
+
+.coming-soon h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #374151;
+}
+
+.coming-soon p {
+  font-size: 16px;
+  margin: 0;
+}

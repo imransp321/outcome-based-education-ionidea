@@ -1,0 +1,233 @@
+/* Curriculum Settings Styles - Using Business Classes */
+
+/* Curriculum Selection Card */
+.curriculum-selection-card {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.curriculum-selection-header {
+  margin-bottom: 16px;
+}
+
+.curriculum-selection-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #495057;
+  margin: 0 0 12px 0;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.curriculum-selection-separator {
+  height: 1px;
+  background-color: #dee2e6;
+  width: 100%;
+  margin: 0;
+}
+
+.curriculum-selection-content {
+  margin-top: 16px;
+}
+
+.curriculum-selection-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 8px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.curriculum-selection-label .required {
+  color: #dc3545;
+  margin-left: 2px;
+}
+
+.curriculum-selection-dropdown {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #495057;
+  background-color: white;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px 12px;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.curriculum-selection-dropdown:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.curriculum-selection-dropdown:hover {
+  border-color: #adb5bd;
+}
+
+.curriculum-selection-dropdown option[value=""] {
+  display: none;
+}
+
+.curriculum-selection-dropdown:invalid {
+  color: #6c757d;
+}
+
+.curriculum-selection-dropdown:valid {
+  color: #495057;
+}
+
+/* Grid Layout Styles */
+.business-data-grid {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+}
+
+.business-grid-header {
+  display: flex;
+  background: #f8fafc;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.business-grid-row {
+  display: flex;
+  border-bottom: 1px solid #e5e7eb;
+  transition: background-color 0.2s ease;
+}
+
+.business-grid-row:hover {
+  background: #f8fafc;
+}
+
+.business-grid-row:last-child {
+  border-bottom: none;
+}
+
+.business-grid-cell {
+  padding: 16px 20px;
+  display: flex;
+  align-items: flex-start;
+  font-size: 12px;
+  border-right: 1px solid #f1f5f9;
+  flex-direction: column;
+}
+
+.business-grid-cell:last-child {
+  border-right: none;
+}
+
+/* Grid Cell Specific Sizes */
+.business-grid-cell-code {
+  flex: 0 0 120px;
+}
+
+.business-grid-cell-name {
+  flex: 0 0 200px;
+}
+
+.business-grid-cell-type {
+  flex: 0 0 120px;
+}
+
+.business-grid-cell-credits {
+  flex: 0 0 100px;
+}
+
+.business-grid-cell-hours {
+  flex: 0 0 120px;
+}
+
+.business-grid-cell-weight {
+  flex: 0 0 100px;
+}
+
+.business-grid-cell-description {
+  flex: 1;
+  min-width: 250px;
+}
+
+.business-grid-cell-actions {
+  flex: 0 0 180px;
+  text-align: center;
+  border-right: none;
+}
+
+/* Grid Header Styling */
+.business-grid-header .business-grid-cell {
+  padding: 16px 20px;
+  border-right: 1px solid #e2e8f0;
+  font-weight: 700;
+  color: #374151;
+  font-size: 17px;
+  text-transform: none;
+}
+
+.business-grid-header .business-grid-cell:last-child {
+  border-right: none;
+}
+
+/* Cell Content Styling */
+.business-cell-title {
+  font-weight: 400;
+  color: #1f2937;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.business-cell-text {
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.business-cell-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .business-grid-cell {
+    padding: 12px 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .business-organisation-page {
+    padding: 16px;
+  }
+
+  .business-grid-cell {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .business-cell-text {
+    font-size: 11px;
+  }
+
+  .business-form-select {
+    max-width: 100%;
+  }
+
+  .business-modal {
+    width: 95%;
+    margin: 16px;
+  }
+}

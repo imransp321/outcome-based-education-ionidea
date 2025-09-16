@@ -1,0 +1,216 @@
+/* Book Chapter Modal Styles */
+.book-chapter-modal-enhanced {
+  max-width: 1200px;
+  width: 95%;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  font-family: 'Calibri', sans-serif;
+}
+
+.book-chapter-form-container {
+  padding: 0;
+}
+
+.book-chapter-form-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  padding: 24px;
+}
+
+.book-chapter-form-left,
+.book-chapter-form-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.book-chapter-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.book-chapter-required {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 14px;
+  font-family: 'Calibri', sans-serif;
+}
+
+/* Removed asterisk from required fields
+.book-chapter-required::after {
+  content: ' *';
+  color: #e74c3c;
+}
+*/
+
+.book-chapter-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.book-chapter-input {
+  width: 100%;
+  padding: 12px 16px 12px 44px;
+  border: 2px solid #e1e8ed;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Calibri', sans-serif;
+  background: #ffffff;
+  transition: all 0.3s ease;
+  color: #2c3e50;
+}
+
+.book-chapter-input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.book-chapter-input.book-chapter-error {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 3px rgba(231, 76, 92, 0.1);
+}
+
+.book-chapter-input-icon {
+  position: absolute;
+  left: 16px;
+  color: #7f8c8d;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.book-chapter-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+.book-chapter-textarea-wrapper {
+  position: relative;
+}
+
+.book-chapter-textarea {
+  width: 100%;
+  padding: 12px 16px 12px 44px;
+  border: 2px solid #e1e8ed;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Calibri', sans-serif;
+  background: #ffffff;
+  transition: all 0.3s ease;
+  color: #2c3e50;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.book-chapter-textarea:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.book-chapter-textarea.book-chapter-error {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 3px rgba(231, 76, 92, 0.1);
+}
+
+.book-chapter-textarea-icon {
+  position: absolute;
+  left: 16px;
+  top: 12px;
+  color: #7f8c8d;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.book-chapter-section-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 14px;
+  font-family: 'Calibri', sans-serif;
+  margin-bottom: 8px;
+}
+
+.book-chapter-label-icon {
+  color: #3498db;
+}
+
+.book-chapter-error-message {
+  color: #e74c3c;
+  font-size: 12px;
+  font-family: 'Calibri', sans-serif;
+  margin-top: 4px;
+}
+
+.book-chapter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Calibri', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.book-chapter-btn-secondary {
+  background: #f8f9fa;
+  color: #6c757d;
+  border: 2px solid #e9ecef;
+}
+
+.book-chapter-btn-secondary:hover {
+  background: #e9ecef;
+  color: #495057;
+}
+
+.book-chapter-btn-primary {
+  background: #3b82f6;
+  color: #ffffff;
+  border: 2px solid #3b82f6;
+}
+
+.book-chapter-btn-primary:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+.book-chapter-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .book-chapter-modal-enhanced {
+    width: 98%;
+    max-height: 95vh;
+  }
+  
+  .book-chapter-form-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 16px;
+  }
+  
+  .book-chapter-form-left,
+  .book-chapter-form-right {
+    gap: 16px;
+  }
+}

@@ -1,0 +1,201 @@
+/* Patent Innovation Page Styles */
+.patent-innovation-page {
+  min-height: 100vh;
+  background-color: #f8fafc;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+/* Page Header */
+.page-header {
+  background: #ffffff;
+  padding: 24px 32px;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 8px 0;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.page-header p {
+  font-size: 16px;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.5;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+/* Patent Grid Section */
+.patent-grid-section {
+  margin: 0 32px 24px 32px;
+}
+
+/* Grid Customizations for Patent */
+.patent-innovation-page .grid-container {
+  margin-bottom: 0;
+}
+
+.patent-innovation-page .grid-table th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 2px solid #e5e7eb;
+  position: relative;
+}
+
+.patent-innovation-page .grid-table th:first-child::after {
+  content: ' ↑';
+  color: #6b7280;
+  font-size: 12px;
+  margin-left: 4px;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.patent-innovation-page .grid-table td {
+  vertical-align: top;
+  padding: 16px;
+}
+
+.patent-innovation-page .grid-table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+/* Show entries dropdown styling */
+.patent-innovation-page .grid-header-actions::before {
+  content: 'Show 20 entries';
+  color: #6b7280;
+  font-size: 14px;
+  margin-right: 16px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+/* Pagination styling to match the image */
+.patent-innovation-page .grid-footer {
+  background: #ffffff;
+  border-top: 1px solid #e5e7eb;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.patent-innovation-page .grid-pagination {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.patent-innovation-page .grid-pagination-btn {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #374151;
+  transition: all 0.2s ease;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.patent-innovation-page .grid-pagination-btn:hover:not(:disabled) {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.patent-innovation-page .grid-pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.patent-innovation-page .grid-pagination-btn.active {
+  background: #3b82f6;
+  color: #ffffff;
+  border-color: #3b82f6;
+}
+
+/* Document View Button Styles */
+.document-view-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.document-view-btn:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+}
+
+.document-view-btn:active {
+  transform: translateY(0);
+}
+
+/* Popup Button Styles - Moved to ValidationPopup.css */
+/* These styles are now handled by the unified ValidationPopup component */
+
+/* Professional Styling Enhancements */
+.patent-innovation-page {
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .page-header {
+    padding: 20px 24px;
+  }
+  
+  .page-header h1 {
+    font-size: 24px;
+  }
+  
+  .page-header p {
+    font-size: 14px;
+  }
+
+  .patent-grid-section {
+    margin: 0 24px 20px 24px;
+  }
+
+  .patent-innovation-page .grid-footer {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header {
+    padding: 16px 20px;
+  }
+  
+  .page-header h1 {
+    font-size: 20px;
+  }
+
+  .patent-grid-section {
+    margin: 0 16px 16px 16px;
+  }
+}
+

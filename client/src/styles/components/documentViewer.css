@@ -1,0 +1,372 @@
+/* Document Viewer Modal Styles */
+.document-viewer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.document-viewer-modal {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 1000px;
+  height: 90%;
+  max-height: 800px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.document-viewer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f9fafb;
+  border-radius: 12px 12px 0 0;
+}
+
+.document-viewer-title h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+  font-family: 'Calibri', sans-serif;
+}
+
+.document-name {
+  display: block;
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 4px;
+  font-family: 'Calibri', sans-serif;
+}
+
+.document-viewer-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.document-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Calibri', sans-serif;
+}
+
+.document-action-btn.download-btn {
+  background: #3b82f6;
+  color: white;
+}
+
+.document-action-btn.download-btn:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.document-action-btn.close-btn {
+  background: #6b7280;
+  color: white;
+}
+
+.document-action-btn.close-btn:hover {
+  background: #4b5563;
+  transform: translateY(-1px);
+}
+
+.document-viewer-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  max-height: calc(100vh - 200px);
+  padding: 20px;
+  background: #e5e7eb;
+}
+
+.document-preview-container {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background: #f8fafc;
+  position: relative;
+  overflow: auto;
+  min-height: 400px;
+  max-height: calc(100vh - 300px);
+  border-radius: 6px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.document-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: white;
+}
+
+.document-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.document-unsupported {
+  text-align: center;
+  padding: 40px;
+  color: #6b7280;
+}
+
+.document-unsupported-icon {
+  margin-bottom: 16px;
+  color: #9ca3af;
+}
+
+.document-unsupported h4 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #374151;
+  font-family: 'Calibri', sans-serif;
+}
+
+.document-unsupported p {
+  margin: 0 0 20px 0;
+  font-size: 14px;
+  color: #6b7280;
+  font-family: 'Calibri', sans-serif;
+}
+
+/* Document Error State */
+.document-error {
+  text-align: center;
+  padding: 40px;
+  color: #6b7280;
+}
+
+.document-error-icon {
+  margin-bottom: 16px;
+  color: #ef4444;
+}
+
+.document-error h4 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #374151;
+  font-family: 'Calibri', sans-serif;
+}
+
+.document-error p {
+  margin: 0 0 20px 0;
+  font-size: 14px;
+  color: #6b7280;
+  font-family: 'Calibri', sans-serif;
+}
+
+.document-error-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.document-action-btn.retry-btn {
+  background: #10b981;
+  color: white;
+}
+
+.document-action-btn.retry-btn:hover {
+  background: #059669;
+  transform: translateY(-1px);
+}
+
+/* Document Loading State */
+.document-loading {
+  text-align: center;
+  padding: 40px;
+  color: #6b7280;
+}
+
+.document-loading-spinner {
+  margin-bottom: 16px;
+  color: #3b82f6;
+}
+
+.document-loading h4 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #374151;
+  font-family: 'Calibri', sans-serif;
+}
+
+.document-loading p {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+  font-family: 'Calibri', sans-serif;
+}
+
+/* Document View Button in Grid */
+.document-view-btn {
+  background: none;
+  border: none;
+  color: #3b82f6;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  font-family: 'Calibri', sans-serif;
+}
+
+.document-view-btn:hover {
+  background: #eff6ff;
+  color: #2563eb;
+  transform: translateY(-1px);
+}
+
+.document-view-btn:active {
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .document-viewer-modal {
+    width: 95%;
+    height: 95%;
+    margin: 10px;
+  }
+  
+  .document-viewer-header {
+    padding: 16px 20px;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  
+  .document-viewer-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  
+  .document-action-btn {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+}
+
+/* PDF Viewer Styles */
+.react-pdf__Document {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  overflow: auto;
+}
+
+.react-pdf__Page {
+  max-width: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  background: white;
+}
+
+.react-pdf__Page__canvas {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* DOCX Content Styles */
+.docx-content {
+  font-family: 'Calibri', Arial, sans-serif;
+  line-height: 1.6;
+  color: #374151;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+}
+
+.docx-content h1,
+.docx-content h2,
+.docx-content h3,
+.docx-content h4,
+.docx-content h5,
+.docx-content h6 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.docx-content p {
+  margin-bottom: 1em;
+}
+
+.docx-content ul,
+.docx-content ol {
+  margin-bottom: 1em;
+  padding-left: 2em;
+}
+
+.docx-content table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.docx-content table th,
+.docx-content table td {
+  border: 1px solid #d1d5db;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.docx-content table th {
+  background-color: #f9fafb;
+  font-weight: 600;
+}
+
+@media (max-width: 480px) {
+  .document-viewer-overlay {
+    padding: 10px;
+  }
+  
+  .document-viewer-modal {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+  
+  .document-viewer-header {
+    border-radius: 0;
+  }
+}

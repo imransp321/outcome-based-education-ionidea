@@ -1,0 +1,253 @@
+/* E-Content Development Page Styles - Now using Grid.css */
+.grid-page {
+  padding: 0;
+  background-color: transparent;
+  min-height: auto;
+  width: 100%;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+/* File Preview Styles */
+.file-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+}
+
+.file-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  text-align: center;
+  word-break: break-all;
+  max-width: 200px;
+}
+
+/* Page Header */
+.page-header {
+  background: #ffffff;
+  padding: 24px 32px;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 8px 0;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.page-header p {
+  font-size: 16px;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.5;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+/* Tab Navigation */
+.tab-navigation {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 0 32px;
+  display: flex;
+  gap: 0;
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  padding: 16px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s ease;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.tab-button:hover {
+  color: #374151;
+  background: #f8f9fa;
+}
+
+.tab-button.active {
+  color: #3b82f6;
+  border-bottom-color: #3b82f6;
+  background: #f8f9fa;
+}
+
+/* E-Content Development Grid Section */
+.e-content-development-grid-section {
+  margin: 0 32px 24px 32px;
+}
+
+/* Grid Customizations for E-Content Development */
+.e-content-development-page .grid-container {
+  margin-bottom: 0;
+}
+
+.e-content-development-page .grid-table th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 2px solid #e5e7eb;
+  position: relative;
+}
+
+.e-content-development-page .grid-table th:first-child::after {
+  content: ' ↑';
+  color: #6b7280;
+  font-size: 12px;
+  margin-left: 4px;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.e-content-development-page .grid-table th:nth-child(2)::after {
+  content: ' ↑';
+  color: #6b7280;
+  font-size: 12px;
+  margin-left: 4px;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.e-content-development-page .grid-table td {
+  vertical-align: top;
+  padding: 16px;
+}
+
+.e-content-development-page .grid-table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+/* Show entries dropdown styling */
+.e-content-development-page .grid-header-actions::before {
+  content: 'Show 20 entries';
+  color: #6b7280;
+  font-size: 14px;
+  margin-right: 16px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+/* Pagination styling to match the image */
+.e-content-development-page .grid-footer {
+  background: #ffffff;
+  border-top: 1px solid #e5e7eb;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.e-content-development-page .grid-pagination {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.e-content-development-page .grid-pagination-btn {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #374151;
+  transition: all 0.2s ease;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.e-content-development-page .grid-pagination-btn:hover:not(:disabled) {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.e-content-development-page .grid-pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.e-content-development-page .grid-pagination-btn.active {
+  background: #3b82f6;
+  color: #ffffff;
+  border-color: #3b82f6;
+}
+
+/* Professional Styling Enhancements */
+.e-content-development-page {
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .page-header {
+    padding: 20px 24px;
+  }
+  
+  .page-header h1 {
+    font-size: 24px;
+  }
+  
+  .page-header p {
+    font-size: 14px;
+  }
+
+  .tab-navigation {
+    padding: 0 24px;
+  }
+
+  .tab-button {
+    padding: 12px 16px;
+    font-size: 13px;
+  }
+
+  .e-content-development-grid-section {
+    margin: 0 24px 20px 24px;
+  }
+
+  .e-content-development-page .grid-footer {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header {
+    padding: 16px 20px;
+  }
+  
+  .page-header h1 {
+    font-size: 20px;
+  }
+
+  .tab-navigation {
+    padding: 0 16px;
+    flex-direction: column;
+  }
+
+  .tab-button {
+    padding: 10px 12px;
+    font-size: 12px;
+    text-align: left;
+  }
+
+  .e-content-development-grid-section {
+    margin: 0 16px 16px 16px;
+  }
+}
+

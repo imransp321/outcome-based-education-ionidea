@@ -1,0 +1,176 @@
+/* Research Projects Page Styles */
+.research-projects-container {
+  padding: 24px;
+  background: #f8fafc;
+  min-height: 100vh;
+}
+
+.research-projects-header {
+  margin-bottom: 24px;
+}
+
+.research-projects-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 8px 0;
+  font-family: 'Calibri', sans-serif;
+}
+
+.research-projects-subtitle {
+  font-size: 16px;
+  color: #64748b;
+  margin: 0;
+  font-family: 'Calibri', sans-serif;
+}
+
+/* Document View Button */
+.document-view-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Calibri', sans-serif;
+}
+
+.document-view-btn:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.document-view-btn:active {
+  transform: translateY(0);
+}
+
+/* No Document Tag */
+.no-document-tag {
+  color: #94a3b8;
+  font-size: 12px;
+  font-style: italic;
+  font-family: 'Calibri', sans-serif;
+}
+
+/* Upload Area Customization */
+.research-projects-upload {
+  border: 2px dashed #cbd5e1;
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+  transition: all 0.2s ease;
+  background: #ffffff;
+}
+
+.research-projects-upload:hover {
+  border-color: #3b82f6;
+  background: #f8fafc;
+}
+
+.research-projects-upload.drag-over {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+
+/* Form Styling */
+.research-projects-form-container {
+  padding: 32px;
+  background: #ffffff;
+  max-height: none;
+  overflow: visible;
+  min-height: 100%;
+}
+
+/* Grid Styling */
+.research-projects-grid {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Status Badges */
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'Calibri', sans-serif;
+}
+
+.status-ongoing {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.status-completed {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.status-pending {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+/* Amount Styling */
+.amount-text {
+  font-weight: 600;
+  color: #059669;
+  font-family: 'Calibri', sans-serif;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .research-projects-container {
+    padding: 16px;
+  }
+  
+  .research-projects-title {
+    font-size: 24px;
+  }
+  
+  .research-projects-form-container {
+    padding: 20px;
+  }
+  
+  .document-view-btn {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+}
+
+/* Loading States */
+.research-projects-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: #64748b;
+  font-family: 'Calibri', sans-serif;
+}
+
+/* Error States */
+.research-projects-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: #dc2626;
+  font-family: 'Calibri', sans-serif;
+}
+
+/* Success States */
+.research-projects-success {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: #059669;
+  font-family: 'Calibri', sans-serif;
+}

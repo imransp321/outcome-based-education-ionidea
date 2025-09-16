@@ -1,0 +1,39 @@
+/* Card Component Styles */
+.card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.card-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f8f9fa;
+}
+
+.card-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.card-body {
+  padding: 24px;
+}
+
+/* Sidebar Collapsed Card Adjustments */
+.side-menu:not(.open) + .page-content .card-header {
+  text-align: left;
+}
+
+.side-menu:not(.open) + .page-content .card-header h3 {
+  text-align: left;
+}
+
+.side-menu:not(.open) + .page-content .card-body {
+  text-align: left;
+}

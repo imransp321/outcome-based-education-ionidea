@@ -1,0 +1,198 @@
+/* Faculty Profile Modal Styles */
+.faculty-profile-modal-enhanced {
+  max-width: 1000px;
+  width: 95%;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  font-family: 'Calibri', sans-serif;
+}
+
+.faculty-profile-form-container {
+  padding: 0;
+}
+
+.faculty-profile-form-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  padding: 24px;
+}
+
+.faculty-profile-form-left,
+.faculty-profile-form-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.faculty-profile-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.faculty-profile-required {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 14px;
+  font-family: 'Calibri', sans-serif;
+}
+
+.faculty-profile-required::after {
+  content: ' *';
+  color: #e74c3c;
+}
+
+.faculty-profile-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.faculty-profile-input {
+  width: 100%;
+  padding: 12px 16px 12px 44px;
+  border: 2px solid #e1e8ed;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Calibri', sans-serif;
+  background: #ffffff;
+  transition: all 0.3s ease;
+  color: #2c3e50;
+}
+
+.faculty-profile-input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.faculty-profile-input.faculty-profile-error {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 3px rgba(231, 76, 92, 0.1);
+}
+
+.faculty-profile-input-icon {
+  position: absolute;
+  left: 16px;
+  color: #7f8c8d;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.faculty-profile-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+.faculty-profile-textarea-wrapper {
+  position: relative;
+}
+
+.faculty-profile-textarea {
+  width: 100%;
+  padding: 12px 16px 12px 44px;
+  border: 2px solid #e1e8ed;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Calibri', sans-serif;
+  background: #ffffff;
+  transition: all 0.3s ease;
+  color: #2c3e50;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.faculty-profile-textarea:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.faculty-profile-textarea.faculty-profile-error {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 3px rgba(231, 76, 92, 0.1);
+}
+
+.faculty-profile-textarea-icon {
+  position: absolute;
+  left: 16px;
+  top: 12px;
+  color: #7f8c8d;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.faculty-profile-section-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 14px;
+  font-family: 'Calibri', sans-serif;
+  margin-bottom: 8px;
+}
+
+.faculty-profile-label-icon {
+  color: #3498db;
+}
+
+.faculty-profile-error-message {
+  color: #e74c3c;
+  font-size: 12px;
+  font-family: 'Calibri', sans-serif;
+  margin-top: 4px;
+}
+
+.faculty-profile-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Calibri', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.faculty-profile-btn-secondary {
+  background: #f8f9fa;
+  color: #6c757d;
+  border: 2px solid #e9ecef;
+}
+
+.faculty-profile-btn-secondary:hover {
+  background: #e9ecef;
+  color: #495057;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .faculty-profile-modal-enhanced {
+    width: 98%;
+    max-height: 95vh;
+  }
+  
+  .faculty-profile-form-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 16px;
+  }
+  
+  .faculty-profile-form-left,
+  .faculty-profile-form-right {
+    gap: 16px;
+  }
+}

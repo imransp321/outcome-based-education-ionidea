@@ -1,0 +1,106 @@
+/* Awards Honors Page Styles - Using Grid.tsx styles */
+.grid-page {
+  padding: 0;
+  background-color: transparent;
+  min-height: auto;
+  width: 100%;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+/* Ensure grid borders are properly applied */
+.grid-page .grid-table {
+  border: 1px solid #e5e7eb !important;
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+}
+
+.grid-page .grid-table th {
+  border: 1px solid #e5e7eb !important;
+  border-top: none !important;
+  border-left: none !important;
+}
+
+.grid-page .grid-table th:first-child {
+  border-left: 1px solid #e5e7eb !important;
+}
+
+.grid-page .grid-table th:last-child {
+  border-right: 1px solid #e5e7eb !important;
+}
+
+.grid-page .grid-table thead tr th {
+  border-top: 1px solid #e5e7eb !important;
+}
+
+.grid-page .grid-table td {
+  border: 1px solid #e5e7eb !important;
+  border-top: none !important;
+  border-left: none !important;
+}
+
+.grid-page .grid-table td:first-child {
+  border-left: 1px solid #e5e7eb !important;
+}
+
+.grid-page .grid-table td:last-child {
+  border-right: 1px solid #e5e7eb !important;
+}
+
+.grid-page .grid-table tbody tr:first-child td {
+  border-top: 1px solid #e5e7eb !important;
+}
+
+.grid-page .grid-table tbody tr:last-child td {
+  border-bottom: 1px solid #e5e7eb !important;
+}
+
+/* Modal styles are now handled by modals.css - no custom modal CSS needed here */
+
+/* Page Header - Using Grid.tsx header styles */
+.page-header {
+  margin-bottom: 24px;
+  padding: 0 0 16px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.page-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 8px 0;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.page-header p {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.5;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+/* Responsive Design - Using Grid.tsx responsive styles */
+@media (max-width: 768px) {
+  .page-header h1 {
+    font-size: 20px;
+  }
+  
+  .page-header p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header {
+    margin-bottom: 20px;
+  }
+  
+  .page-header h1 {
+    font-size: 18px;
+  }
+  
+  .page-header p {
+    font-size: 12px;
+  }
+}

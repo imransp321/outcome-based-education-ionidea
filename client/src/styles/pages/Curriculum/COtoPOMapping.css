@@ -1,0 +1,685 @@
+/* CO to PO Mapping Page Styles */
+
+.co-po-mapping-page {
+  padding: 0;
+  background-color: transparent;
+  min-height: auto;
+  width: 100%;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+/* Page Header */
+.co-po-mapping-page .page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 0 0 16px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.co-po-mapping-page .page-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.co-po-mapping-page .page-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.co-po-mapping-page .action-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.co-po-mapping-page .action-btn:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.co-po-mapping-page .artifacts-btn {
+  color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.co-po-mapping-page .artifacts-btn:hover {
+  background: #eff6ff;
+  border-color: #2563eb;
+}
+
+.co-po-mapping-page .guidelines-btn {
+  color: #10b981;
+  border-color: #10b981;
+}
+
+.co-po-mapping-page .guidelines-btn:hover {
+  background: #ecfdf5;
+  border-color: #059669;
+}
+
+/* Filter Section */
+.co-po-mapping-page .filter-section {
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.co-po-mapping-page .filter-container {
+  display: flex;
+  gap: 20px;
+  align-items: end;
+  flex-wrap: wrap;
+}
+
+.co-po-mapping-page .filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 200px;
+}
+
+.co-po-mapping-page .filter-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  margin: 0;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.co-po-mapping-page .filter-select {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #ffffff;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.co-po-mapping-page .filter-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.co-po-mapping-page .filter-select:disabled {
+  background: #f9fafb;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* Mapping Status */
+.co-po-mapping-page .mapping-status {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: #d1fae5;
+  border: 1px solid #a7f3d0;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.co-po-mapping-page .status-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #065f46;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.co-po-mapping-page .status-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #047857;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+/* Mapping Matrix Container */
+.co-po-mapping-page .mapping-matrix-container {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.co-po-mapping-page .matrix-table-wrapper {
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 70vh;
+  width: 100%;
+}
+
+.co-po-mapping-page .mapping-matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  min-width: 1000px;
+  table-layout: fixed;
+}
+
+.co-po-mapping-page .mapping-matrix-table thead {
+  background: #f8f9fa;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.co-po-mapping-page .mapping-matrix-table th {
+  padding: 12px 8px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.co-po-mapping-page .co-header {
+  text-align: left;
+  width: 400px;
+  min-width: 400px;
+  max-width: 400px;
+}
+
+.co-po-mapping-page .po-header {
+  width: 80px;
+  min-width: 80px;
+  max-width: 80px;
+  text-align: center;
+  position: relative;
+  cursor: help;
+}
+
+.co-po-mapping-page .po-header:hover {
+  background-color: #f0f9ff;
+  color: #1e40af;
+}
+
+/* PO Header hover effect */
+.co-po-mapping-page .po-header {
+  cursor: help;
+}
+
+.co-po-mapping-page .mapping-matrix-table td {
+  padding: 8px;
+  border: 1px solid #e5e7eb;
+  vertical-align: top;
+  font-size: 12px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+/* Course Name Row */
+.co-po-mapping-page .course-name-row {
+  background: #f0f9ff;
+}
+
+.co-po-mapping-page .course-name-cell {
+  font-weight: 600;
+  color: #1e40af;
+  font-size: 14px;
+  padding: 12px 16px;
+  width: 400px;
+  min-width: 400px;
+  max-width: 400px;
+}
+
+.co-po-mapping-page .course-title {
+  font-weight: 600;
+  color: #1e40af;
+  font-size: 14px;
+}
+
+/* Course Outcome Rows */
+.co-po-mapping-page .co-row:hover {
+  background: #f8f9fa;
+}
+
+.co-po-mapping-page .co-cell {
+  padding: 12px 16px;
+  vertical-align: top;
+  width: 400px;
+  min-width: 400px;
+  max-width: 400px;
+}
+
+.co-po-mapping-page .co-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.co-po-mapping-page .co-code {
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.co-po-mapping-page .co-description {
+  color: #4b5563;
+  font-size: 12px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+/* Mapping Cells */
+.co-po-mapping-page .mapping-cell {
+  text-align: center;
+  vertical-align: middle;
+  padding: 8px 4px;
+  width: 80px;
+  min-width: 80px;
+  max-width: 80px;
+  height: 60px;
+}
+
+.co-po-mapping-page .mapping-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: help;
+}
+
+.co-po-mapping-page .mapping-content:hover {
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  padding: 2px;
+}
+
+.co-po-mapping-page .strength-indicator {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  margin-bottom: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.co-po-mapping-page .mapping-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.co-po-mapping-page .contribution-pi {
+  font-size: 10px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.co-po-mapping-page .justify-btn {
+  background: #3b82f6;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  white-space: nowrap;
+}
+
+.co-po-mapping-page .justify-btn:hover {
+  background: #2563eb;
+  transform: scale(1.05);
+}
+
+.co-po-mapping-page .add-mapping-btn {
+  width: 40px;
+  height: 40px;
+  border: 2px dashed #d1d5db;
+  border-radius: 6px;
+  background: #f9fafb;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.co-po-mapping-page .add-mapping-btn:hover {
+  border-color: #3b82f6;
+  color: #3b82f6;
+  background: #eff6ff;
+  transform: scale(1.05);
+}
+
+.co-po-mapping-page .add-mapping-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Mapping content hover effect */
+.co-po-mapping-page .mapping-content {
+  cursor: help;
+}
+
+.co-po-mapping-page .empty-cell {
+  background: #f9fafb;
+}
+
+
+/* Empty State */
+.co-po-mapping-page .empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #6b7280;
+  font-size: 16px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.co-po-mapping-page .empty-state h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #374151;
+  margin: 16px 0 8px 0;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.co-po-mapping-page .empty-state p {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.co-po-mapping-page .empty-state svg {
+  width: 48px;
+  height: 48px;
+  opacity: 0.5;
+  color: #9ca3af;
+}
+
+/* Modal Styles */
+.co-po-mapping-page .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.co-po-mapping-page .modal-container {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.co-po-mapping-page .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.co-po-mapping-page .modal-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.co-po-mapping-page .modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: #6b7280;
+  transition: color 0.2s ease;
+}
+
+.co-po-mapping-page .modal-close:hover {
+  color: #374151;
+}
+
+.co-po-mapping-page .modal-content {
+  padding: 24px;
+}
+
+.co-po-mapping-page .mapping-info {
+  background: #f8f9fa;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.co-po-mapping-page .info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.co-po-mapping-page .info-item:last-child {
+  margin-bottom: 0;
+}
+
+.co-po-mapping-page .info-item label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.co-po-mapping-page .info-item span {
+  font-size: 14px;
+  color: #1f2937;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.co-po-mapping-page .form-group {
+  margin-bottom: 20px;
+}
+
+.co-po-mapping-page .form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 8px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.co-po-mapping-page .form-select,
+.co-po-mapping-page .form-input,
+.co-po-mapping-page .form-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #374151;
+  transition: all 0.2s ease;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.co-po-mapping-page .form-select:focus,
+.co-po-mapping-page .form-input:focus,
+.co-po-mapping-page .form-textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.co-po-mapping-page .form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.co-po-mapping-page .modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 20px 24px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.co-po-mapping-page .btn-secondary,
+.co-po-mapping-page .btn-primary {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.co-po-mapping-page .btn-secondary {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  color: #374151;
+}
+
+.co-po-mapping-page .btn-secondary:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.co-po-mapping-page .btn-primary {
+  background: #3b82f6;
+  border: 1px solid #3b82f6;
+  color: #ffffff;
+}
+
+.co-po-mapping-page .btn-primary:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .co-po-mapping-page .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .co-po-mapping-page .page-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  
+  .co-po-mapping-page .filter-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  
+  .co-po-mapping-page .filter-group {
+    min-width: auto;
+  }
+  
+  .co-po-mapping-page .mapping-matrix-table {
+    font-size: 11px;
+  }
+  
+  .co-po-mapping-page .co-header {
+    min-width: 250px;
+    max-width: 250px;
+  }
+  
+  .co-po-mapping-page .po-header {
+    min-width: 60px;
+    max-width: 60px;
+  }
+  
+  .co-po-mapping-page .mapping-cell {
+    min-width: 60px;
+    max-width: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .co-po-mapping-page .page-header h1 {
+    font-size: 20px;
+  }
+  
+  .co-po-mapping-page .action-btn {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+  
+  .co-po-mapping-page .filter-section {
+    padding: 16px;
+  }
+  
+  .co-po-mapping-page .mapping-matrix-table {
+    font-size: 10px;
+  }
+  
+  .co-po-mapping-page .co-header {
+    min-width: 200px;
+    max-width: 200px;
+  }
+  
+  .co-po-mapping-page .po-header {
+    min-width: 50px;
+    max-width: 50px;
+  }
+  
+  .co-po-mapping-page .mapping-cell {
+    min-width: 50px;
+    max-width: 50px;
+  }
+  
+  .co-po-mapping-page .strength-indicator {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+  
+  .co-po-mapping-page .justify-btn {
+    padding: 1px 4px;
+    font-size: 9px;
+  }
+}

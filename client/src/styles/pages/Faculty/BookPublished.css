@@ -1,0 +1,420 @@
+/* Book Published Page Styles - Matching Award & Honors Page */
+
+/* Grid Page Layout */
+.grid-page {
+  padding: 0;
+  background: #f8f9fa;
+  min-height: 100vh;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+/* Page Header */
+.grid-page .page-header {
+  background: white;
+  color: #1f2937;
+  padding: 24px 32px;
+  margin-bottom: 0;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.grid-page .page-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  color: #1e40af;
+}
+
+.grid-page .page-header p {
+  font-size: 14px;
+  margin: 0;
+  color: #6b7280;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+/* Grid Container */
+.grid-page .grid-container {
+  background: white;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+}
+
+/* Grid Header */
+.grid-page .grid-header {
+  background: #f8fafc;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.grid-page .grid-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.grid-page .grid-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Search Input */
+.grid-page .grid-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.grid-page .grid-search input {
+  padding: 10px 16px 10px 42px !important;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  width: 250px;
+  transition: all 0.2s ease;
+}
+
+.grid-page .grid-search input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Add Button */
+.grid-page .grid-add-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  transition: all 0.2s ease;
+}
+
+.grid-page .grid-add-btn:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* Grid Table */
+.grid-page .grid-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.grid-page .grid-table th {
+  background: #f8fafc;
+  color: #374151;
+  font-weight: 600;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 2px solid #e5e7eb;
+  font-size: 14px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.grid-page .grid-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 14px;
+  color: #374151;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  vertical-align: top;
+  text-align: left;
+}
+
+.grid-page .grid-table tr:hover {
+  background: #f9fafb;
+}
+
+.grid-page .grid-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Actions Column */
+.grid-page .grid-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.grid-page .grid-action-btn {
+  background: none;
+  border: none;
+  padding: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  color: #6b7280;
+}
+
+.grid-page .grid-action-btn:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.grid-page .grid-edit-btn:hover {
+  color: #3b82f6;
+  background: #eff6ff;
+}
+
+.grid-page .grid-delete-btn:hover {
+  color: #ef4444;
+  background: #fef2f2;
+}
+
+/* Grid Footer */
+.grid-page .grid-footer {
+  background: #f8fafc;
+  border-top: 1px solid #e5e7eb;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.grid-page .pagination-info {
+  font-size: 14px;
+  color: #6b7280;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.grid-page .grid-pagination {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.grid-page .grid-pagination-btn {
+  background: white;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  transition: all 0.2s ease;
+}
+
+.grid-page .grid-pagination-btn:hover:not(:disabled) {
+  background: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.grid-page .grid-pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.grid-page .grid-pagination-btn.active {
+  background: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
+
+.grid-page .grid-pagination-btn.active:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+/* Loading State */
+.grid-page .grid-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  color: #6b7280;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+/* Empty State */
+.grid-page .grid-empty {
+  text-align: center;
+  padding: 40px;
+  color: #6b7280;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+/* Pagination Styles - Matching Organisation Details */
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background-color: #f9fafb;
+  border-top: 1px solid #e5e7eb;
+  margin-top: 0;
+}
+
+.pagination-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.pagination-pages {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.pagination-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background-color: white;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background-color: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-btn-primary {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+  color: white;
+}
+
+.pagination-btn-primary:hover {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+.pagination-btn-secondary {
+  background-color: white;
+  border-color: #d1d5db;
+  color: #374151;
+}
+
+.pagination-info {
+  color: #6b7280;
+  font-size: 14px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .grid-page .page-header {
+    padding: 20px 16px;
+  }
+  
+  .grid-page .page-header h1 {
+    font-size: 20px;
+  }
+  
+  .grid-page .grid-header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+  
+  .grid-page .grid-controls {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+  
+  .grid-page .grid-search input {
+    width: 100%;
+  }
+  
+  .grid-page .grid-footer {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+  
+  .grid-page .grid-pagination {
+    justify-content: center;
+  }
+  
+  .grid-page .grid-table {
+    font-size: 12px;
+  }
+  
+  .grid-page .grid-table th,
+  .grid-page .grid-table td {
+    padding: 8px 12px;
+  }
+  
+  .pagination-container {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 20px;
+  }
+  
+  .pagination-controls {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-page .page-header {
+    padding: 16px;
+  }
+  
+  
+  .grid-page .grid-footer {
+    padding: 12px;
+  }
+  
+  .grid-page .grid-table th,
+  .grid-page .grid-table td {
+    padding: 6px 8px;
+  }
+  
+  .pagination-container {
+    padding: 12px 16px;
+  }
+  
+  .pagination-btn {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+  
+  .pagination-info {
+    font-size: 13px;
+    text-align: center;
+  }
+}

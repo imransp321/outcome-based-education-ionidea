@@ -1,0 +1,556 @@
+/* Curriculum Term Details Styles */
+.curriculum-term-details-page {
+  padding: 0;
+  background-color: #ffffff;
+  min-height: auto;
+}
+
+.curriculum-term-details-header {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
+}
+
+.curriculum-term-details-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 8px 0;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.curriculum-term-details-subtitle {
+  font-size: 16px;
+  color: #6b7280;
+  margin: 0;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.curriculum-term-details-content {
+  background: transparent;
+  padding: 0;
+}
+
+/* Override the default page-content padding to match CO Attainment */
+.curriculum-term-details-page .page-content {
+  padding: 24px 32px 32px 24px !important;
+  background-color: #ffffff;
+  min-height: calc(100vh - 144px);
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  overflow-y: auto;
+  position: relative;
+  z-index: 10;
+  margin-top: 80px;
+  margin-left: 280px;
+  width: calc(100% - 280px);
+}
+
+/* When sidebar is open */
+.curriculum-term-details-page .main-content.sidebar-open .page-content {
+  margin-left: 280px;
+  border-left: 1px solid #e5e7eb;
+}
+
+/* When sidebar is closed */
+.curriculum-term-details-page .main-content.sidebar-closed .page-content {
+  margin-left: 0;
+  width: 100%;
+}
+
+/* Filter section styling */
+.curriculum-term-details-page .filter-section {
+  margin-bottom: 24px;
+}
+
+.curriculum-term-details-page .filter-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.curriculum-term-details-page .filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.curriculum-term-details-page .filter-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.curriculum-term-details-page .filter-select {
+  width: 100%;
+  max-width: 600px;
+  padding: 8px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background-color: white;
+  font-size: 14px;
+  color: #374151;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  height: 40px;
+}
+
+.curriculum-term-details-page .filter-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.curriculum-term-details-page .filter-select:disabled {
+  background-color: #f9fafb;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* Grid styling */
+.curriculum-term-details-page .grid-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.curriculum-term-details-page .grid-header {
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.curriculum-term-details-page .grid-title-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.curriculum-term-details-page .program-owner-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #e0f2fe;
+  border: 1px solid #b3e5fc;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #0277bd;
+}
+
+.curriculum-term-details-page .owner-icon {
+  color: #0277bd;
+  flex-shrink: 0;
+}
+
+.curriculum-term-details-page .owner-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.curriculum-term-details-page .owner-label {
+  font-weight: 600;
+  color: #01579b;
+}
+
+.curriculum-term-details-page .owner-name {
+  font-weight: 700;
+  color: #0277bd;
+}
+
+.curriculum-term-details-page .owner-email {
+  font-size: 12px;
+  color: #01579b;
+  font-style: italic;
+}
+
+.curriculum-term-details-page .grid-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+}
+
+.curriculum-term-details-page .grid-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.curriculum-term-details-page .grid-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.curriculum-term-details-page .grid-search-input {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 250px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.curriculum-term-details-page .grid-search-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.curriculum-term-details-page .grid-add-button {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.curriculum-term-details-page .grid-add-button:hover {
+  background: #2563eb;
+}
+
+.curriculum-term-details-page .grid-add-button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* Table styling */
+.curriculum-term-details-page .grid-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.curriculum-term-details-page .grid-table th {
+  background: #f1f5f9;
+  color: #475569;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+/* Column width adjustments */
+.curriculum-term-details-page .grid-table th:nth-child(1),
+.curriculum-term-details-page .grid-table td:nth-child(1) {
+  width: 60px; /* SI No. - narrower */
+}
+
+.curriculum-term-details-page .grid-table th:nth-child(2),
+.curriculum-term-details-page .grid-table td:nth-child(2) {
+  width: 200px; /* Term Name - wider */
+}
+
+.curriculum-term-details-page .grid-table td {
+  padding: 16px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 14px;
+  text-align: left;
+  color: #374151;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.curriculum-term-details-page .grid-table tr:hover {
+  background: #f8fafc;
+}
+
+.curriculum-term-details-page .grid-table input,
+.curriculum-term-details-page .grid-table select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  background-color: white;
+}
+
+.curriculum-term-details-page .grid-table input:focus,
+.curriculum-term-details-page .grid-table select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.curriculum-term-details-page .grid-table select {
+  cursor: pointer;
+}
+
+.curriculum-term-details-page .grid-table select option {
+  padding: 8px 12px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+/* Action buttons */
+.curriculum-term-details-page .grid-action-btn {
+  background: #6b7280;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.curriculum-term-details-page .grid-action-btn:hover {
+  background: #4b5563;
+}
+
+.curriculum-term-details-page .grid-action-btn.delete {
+  background: transparent;
+  border: 1px solid #d1d5db;
+  color: #dc2626;
+}
+
+.curriculum-term-details-page .grid-action-btn.delete:hover {
+  background: #fef2f2;
+  border-color: #dc2626;
+}
+
+.curriculum-term-details-page .grid-action-btn.add {
+  background: transparent;
+  width: 32px; /* Reduced size */
+  height: 32px; /* Reduced size */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  border: 1px solid #d1d5db;
+  color: #059669;
+}
+
+.curriculum-term-details-page .grid-action-btn.add:hover {
+  background: #f0fdf4;
+  border-color: #059669;
+}
+
+.curriculum-term-details-page .grid-action-btn.add svg {
+  width: 16px; /* Reduced icon size */
+  height: 16px; /* Reduced icon size */
+}
+
+/* Footer buttons */
+.curriculum-term-details-page .grid-footer-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 20px;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+}
+
+.curriculum-term-details-page .grid-add-button.save {
+  background: #3b82f6;
+  color: #ffffff;
+  border: 1px solid #3b82f6;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.curriculum-term-details-page .grid-add-button.save:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.curriculum-term-details-page .grid-add-button.approve {
+  background: #059669;
+  color: #ffffff;
+  border: 1px solid #059669;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.curriculum-term-details-page .grid-add-button.approve:hover {
+  background: #047857;
+  border-color: #047857;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+}
+
+/* Loading and empty states */
+.curriculum-term-details-page .grid-loading {
+  text-align: center;
+  padding: 48px 24px;
+  color: #6b7280;
+}
+
+.curriculum-term-details-page .grid-empty {
+  text-align: center;
+  padding: 48px 24px;
+  color: #6b7280;
+}
+
+.curriculum-term-details-page .grid-empty h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #374151;
+}
+
+.curriculum-term-details-page .grid-empty p {
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Total row styling */
+.curriculum-term-details-page .total-row {
+  background-color: #f8fafc;
+  border-top: 2px solid #e2e8f0;
+}
+
+.curriculum-term-details-page .total-row td {
+  font-weight: 600;
+  color: #1e293b;
+  padding: 16px;
+  border-bottom: none;
+}
+
+.curriculum-term-details-page .total-row td:first-child {
+  font-weight: 700;
+  color: #000000; /* Black color for Total */
+}
+
+.curriculum-term-details-page .total-value-tag {
+  display: inline-block;
+  background-color: #f1f5f9;
+  color: #1e293b;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  border: 1px solid #e2e8f0;
+  font-size: 14px;
+}
+
+/* Approval Info Section */
+.curriculum-term-details-page .approval-info-section {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.curriculum-term-details-page .program-owner-note {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #e0f2fe;
+  border: 1px solid #b3e5fc;
+  border-radius: 6px;
+  color: #0277bd;
+}
+
+.curriculum-term-details-page .note-icon {
+  color: #0277bd;
+  flex-shrink: 0;
+}
+
+.curriculum-term-details-page .note-content {
+  font-size: 14px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.curriculum-term-details-page .note-content .email {
+  color: #01579b;
+  font-size: 13px;
+}
+
+.curriculum-term-details-page .approval-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.curriculum-term-details-page .approval-status.pending {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  color: #856404;
+}
+
+.curriculum-term-details-page .approval-status.approved {
+  background: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+}
+
+.curriculum-term-details-page .approval-status.rejected {
+  background: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+}
+
+.curriculum-term-details-page .status-icon {
+  flex-shrink: 0;
+}
+
+.curriculum-term-details-page .status-text {
+  font-weight: 600;
+}
+
+/* Approver note in button */
+.curriculum-term-details-page .approver-note {
+  font-size: 12px;
+  font-weight: 400;
+  opacity: 0.9;
+  margin-left: 8px;
+  font-style: italic;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .curriculum-term-details-page .page-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 16px !important;
+  }
+  
+  .curriculum-term-details-page .grid-search-input {
+    width: 200px;
+  }
+  
+  .curriculum-term-details-page .grid-table {
+    font-size: 12px;
+  }
+  
+  .curriculum-term-details-page .grid-table th,
+  .curriculum-term-details-page .grid-table td {
+    padding: 8px 12px;
+  }
+}

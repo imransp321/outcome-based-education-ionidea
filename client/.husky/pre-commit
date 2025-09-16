@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run CSS validation before commit
+echo "🔍 Validating CSS classes..."
+npm run validate-css
+
+# If validation fails, prevent commit
+if [ $? -ne 0 ]; then
+  echo "❌ CSS validation failed. Please fix the issues before committing."
+  exit 1
+fi
+
+echo "✅ CSS validation passed!"

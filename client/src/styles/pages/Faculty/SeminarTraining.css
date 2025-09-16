@@ -1,0 +1,444 @@
+/* Seminar Training Page Styles */
+.seminar-training-page {
+  padding: 20px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.seminar-training-page .page-header {
+  margin-bottom: 30px;
+}
+
+.seminar-training-page .page-header h1 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 8px;
+}
+
+.seminar-training-page .page-header p {
+  font-size: 16px;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Modal Styles */
+.seminar-training-form {
+  width: 100%;
+  height: 100%;
+}
+
+.seminar-training-form-container {
+  display: flex;
+  gap: 30px;
+  height: 100%;
+}
+
+.seminar-training-form-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.seminar-training-form-right {
+  flex: 1;
+  min-width: 0;
+}
+
+.seminar-training-form-section {
+  margin-bottom: 30px;
+}
+
+.seminar-training-form-section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.seminar-training-form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.seminar-training-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.seminar-training-form-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 4px;
+}
+
+.seminar-training-form-label .required {
+  color: #dc2626;
+  margin-left: 2px;
+}
+
+.seminar-training-form-input {
+  padding: 12px 16px;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  background-color: #ffffff;
+  transition: all 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.seminar-training-form-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.seminar-training-form-input-error {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.seminar-training-form-textarea {
+  padding: 12px 16px;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  background-color: #ffffff;
+  transition: all 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.seminar-training-form-textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.seminar-training-form-error-message {
+  font-size: 12px;
+  color: #dc2626;
+  margin-top: 4px;
+}
+
+/* Rich Text Editor Styles */
+.seminar-training-rich-text-editor {
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.seminar-training-editor-toolbar {
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 8px 12px;
+}
+
+.seminar-training-toolbar-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.seminar-training-toolbar-row:last-child {
+  margin-bottom: 0;
+}
+
+.seminar-training-toolbar-select {
+  padding: 4px 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  background-color: #ffffff;
+  font-size: 12px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  color: #374151;
+  cursor: pointer;
+}
+
+.seminar-training-toolbar-btn {
+  padding: 6px 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  background-color: #ffffff;
+  font-size: 12px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 32px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seminar-training-toolbar-btn:hover {
+  background-color: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.seminar-training-toolbar-btn:active {
+  background-color: #e5e7eb;
+}
+
+.seminar-training-editor-content {
+  width: 100%;
+  min-height: 300px;
+  padding: 16px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  line-height: 1.5;
+  color: #374151;
+  background-color: #ffffff;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.seminar-training-editor-content::placeholder {
+  color: #9ca3af;
+}
+
+/* Form Actions */
+.seminar-training-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 20px 0;
+  border-top: 1px solid #e5e7eb;
+  margin-top: 30px;
+}
+
+.seminar-training-btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+  min-width: 100px;
+}
+
+.seminar-training-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.seminar-training-btn-secondary {
+  background-color: #ffffff;
+  color: #374151;
+  border-color: #d1d5db;
+}
+
+.seminar-training-btn-secondary:hover:not(:disabled) {
+  background-color: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.seminar-training-btn-primary {
+  background-color: #3b82f6;
+  color: #ffffff;
+  border-color: #3b82f6;
+}
+
+.seminar-training-btn-primary:hover:not(:disabled) {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .seminar-training-form-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .seminar-training-form-left,
+  .seminar-training-form-right {
+    flex: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .seminar-training-page {
+    padding: 15px;
+  }
+  
+  .seminar-training-form-actions {
+    flex-direction: column;
+  }
+  
+  .seminar-training-btn {
+    width: 100%;
+  }
+}
+
+/* Document Tags */
+.document-tag-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.document-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.document-tag:hover {
+  opacity: 0.8;
+}
+
+.document-tag-red {
+  background-color: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.document-tag-blue {
+  background-color: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+}
+
+.document-tag-green {
+  background-color: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+
+.document-tag-gray {
+  background-color: #f9fafb;
+  color: #6b7280;
+  border: 1px solid #d1d5db;
+}
+
+.file-icon {
+  font-size: 14px;
+}
+
+.document-text {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.no-document-tag {
+  color: #9ca3af;
+  font-size: 12px;
+  font-style: italic;
+}
+
+/* Success and Error Popups - Moved to ValidationPopup.css */
+/* These styles are now handled by the unified ValidationPopup component */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  max-width: 1200px;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 24px 32px;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+}
+
+.modal-title h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 8px 0;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.modal-title p {
+  font-size: 16px;
+  color: #6b7280;
+  margin: 0;
+  font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', sans-serif;
+}
+
+.modal-close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  color: #6b7280;
+  transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.modal-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 32px;
+  max-height: calc(95vh - 120px);
+}
+
+/* Custom scrollbar for modal content */
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
