@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface BookChapterTextEditorProps {
   value: string;
@@ -13,6 +13,7 @@ const BookChapterTextEditor: React.FC<BookChapterTextEditorProps> = ({
 }) => {
   const [wordCount, setWordCount] = useState(0);
   const [charCount, setCharCount] = useState(0);
+  const editorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const text = value.replace(/<[^>]*>/g, '');
@@ -20,16 +21,69 @@ const BookChapterTextEditor: React.FC<BookChapterTextEditorProps> = ({
     setCharCount(text.length);
   }, [value]);
 
+  // Update editor content when value prop changes
+  useEffect(() => {
+    if (editorRef.current && editorRef.current.innerHTML !== value) {
+      editorRef.current.innerHTML = value;
+    }
+  }, [value]);
+
+  // Prevent default behavior for certain keys
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    // Handle keyboard shortcuts
+    if (e.ctrlKey || e.metaKey) {
+      switch (e.key) {
+        case 'b':
+          e.preventDefault();
+          execCommand('bold');
+          break;
+        case 'i':
+          e.preventDefault();
+          execCommand('italic');
+          break;
+        case 'u':
+          e.preventDefault();
+          execCommand('underline');
+          break;
+        case 'z':
+          e.preventDefault();
+          execCommand('undo');
+          break;
+        case 'y':
+          e.preventDefault();
+          execCommand('redo');
+          break;
+        default:
+          break;
+      }
+    }
+    
+    // Prevent Enter from creating new paragraphs in some cases
+    if (e.key === 'Enter' && e.shiftKey) {
+      e.preventDefault();
+      execCommand('insertHTML', '<br>');
+    }
+  };
+
   const handleInput = (e: React.FormEvent<HTMLDivElement>) => {
     const content = e.currentTarget.innerHTML;
     onChange(content);
   };
 
+  const handlePaste = (e: React.ClipboardEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const text = e.clipboardData.getData('text/plain');
+    execCommand('insertText', text);
+  };
+
   const execCommand = (command: string, value?: string) => {
-    document.execCommand(command, false, value);
-    // Trigger change event
-    const event = new Event('input', { bubbles: true });
-    document.dispatchEvent(event);
+    if (editorRef.current) {
+      editorRef.current.focus();
+      document.execCommand(command, false, value);
+      // Manually trigger the onChange
+      const content = editorRef.current.innerHTML;
+      onChange(content);
+    }
   };
 
   const insertLink = () => {
@@ -44,6 +98,10 @@ const BookChapterTextEditor: React.FC<BookChapterTextEditorProps> = ({
     if (url) {
       execCommand('insertImage', url);
     }
+  };
+
+  const clearFormatting = () => {
+    execCommand('removeFormat');
   };
 
   return (
@@ -264,11 +322,13 @@ const BookChapterTextEditor: React.FC<BookChapterTextEditorProps> = ({
 
       {/* Editor Content Area */}
       <div 
+        ref={editorRef}
         className="book-chapter-editor-content"
         contentEditable
         suppressContentEditableWarning={true}
         onInput={handleInput}
-        dangerouslySetInnerHTML={{ __html: value }}
+        onKeyDown={handleKeyDown}
+        onPaste={handlePaste}
         style={{ minHeight: '200px' }}
         data-placeholder={placeholder}
       />

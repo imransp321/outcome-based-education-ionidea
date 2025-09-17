@@ -72,8 +72,8 @@ const JournalEditorial: React.FC = () => {
     getFieldClassName
   } = useUnifiedValidation();
 
-  // Define validation rules
-  const validationRules = {
+  // Define validation rules - memoized to prevent recreation
+  const validationRules = React.useMemo(() => ({
     position: [
       commonValidationRules.required('Position is required')
     ],
@@ -82,14 +82,14 @@ const JournalEditorial: React.FC = () => {
       commonValidationRules.minLength(3, 'Journal name must be at least 3 characters'),
       commonValidationRules.maxLength(200, 'Journal name must not exceed 200 characters')
     ]
-  };
+  }), []);
 
-  // Grid columns configuration
-  const gridColumns = [
+  // Grid columns configuration - memoized to prevent recreation
+  const gridColumns = React.useMemo(() => [
     { key: 'position', title: 'Position', width: '20%' },
     { key: 'journal_name', title: 'Journal Name', width: '60%' },
     { key: 'upload_file', title: 'Document', width: '20%' }
-  ];
+  ], []);
 
   // Utility functions
   const truncateText = (text: string, maxLength: number): string => {
@@ -181,11 +181,12 @@ const JournalEditorial: React.FC = () => {
         }
       }
 
+      // Create a completely clean submitData object with only primitive values
       const submitData = {
-        position: formData.position,
-        journalName: formData.journal_name,
-        description: formData.description || '',
-        uploadFile: uploadFile || (editingId && !filePreview && !existingFile ? null : formData.upload_file)
+        position: String(formData.position || ''),
+        journalName: String(formData.journal_name || ''),
+        description: String(formData.description || ''),
+        uploadFile: uploadFile ? String(uploadFile) : (editingId && !filePreview && !existingFile ? null : String(formData.upload_file || ''))
       };
 
       const url = editingId 
@@ -194,20 +195,39 @@ const JournalEditorial: React.FC = () => {
       
       const method = editingId ? 'PUT' : 'POST';
 
+      let requestBody;
+      try {
+        // Test each property individually to identify the problematic one
+        console.log('Testing individual properties:');
+        console.log('position:', JSON.stringify(submitData.position));
+        console.log('journalName:', JSON.stringify(submitData.journalName));
+        console.log('description:', JSON.stringify(submitData.description));
+        console.log('uploadFile:', JSON.stringify(submitData.uploadFile));
+        
+        requestBody = JSON.stringify(submitData);
+      } catch (error) {
+        console.error('JSON.stringify error:', error);
+        console.error('submitData that caused error:', submitData);
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+        console.error('Error details:', errorMessage);
+        throw new Error('Failed to serialize form data: ' + errorMessage);
+      }
+
       const response = await fetch(url, {
         method,
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(submitData)
+        body: requestBody
       });
 
       const result = await response.json();
       
       if (result.success) {
-        showSuccessPopup(editingId 
-            ? 'Journal editorial updated successfully' 
-          : 'Journal editorial created successfully');
+        const successMessage = editingId 
+          ? 'Journal editorial updated successfully' 
+          : 'Journal editorial created successfully';
+        showSuccessPopup(successMessage);
         
         setShowAccordion(false);
         setEditingId(null);
@@ -336,7 +356,8 @@ const JournalEditorial: React.FC = () => {
 
   // Handle file selection
   const handleFileSelect = (file: File) => {
-        setSelectedFile(file);
+    setSelectedFile(file);
+    setFileName(file.name);
     setExistingFile(null);
     
     if (file.type.startsWith('image/')) {
@@ -355,6 +376,7 @@ const JournalEditorial: React.FC = () => {
     setSelectedFile(null);
     setFilePreview(null);
     setExistingFile(null);
+    setFileName('');
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }

@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import Grid from '../../components/Grid/Grid';
 import { DocumentViewer, DocumentInfo } from '../../components/DocumentViewer';
 import { DocumentUpload } from '../../components/DocumentUpload';
+import { configAPI } from '../../services/api';
 import '../../styles/pages/Configuration/Grid.css';
 import '../../styles/components/grid.css';
 import '../../styles/components/modals.css';
@@ -10,14 +11,23 @@ import '../../styles/components/SharedModal.css';
 
 interface FacultyInternshipData {
   id?: number;
+  name_of_internship: string;
+  company_and_place: string;
+  duration: string;
+  year: string;
+  outcome: string;
+  upload_file?: string;
+  created_at?: string;
+  updated_at?: string;
+}
+
+interface FacultyInternshipFormData {
   nameOfInternship: string;
   companyAndPlace: string;
   duration: string;
   year: string;
   outcome: string;
-  uploadFile?: string;
-  created_at?: string;
-  updated_at?: string;
+  uploadFile: string;
 }
 
 interface PaginationInfo {
@@ -44,7 +54,7 @@ const FacultyInternship: React.FC = () => {
     hasPrev: false
   });
 
-  const [formData, setFormData] = useState<FacultyInternshipData>({
+  const [formData, setFormData] = useState<FacultyInternshipFormData>({
     nameOfInternship: '',
     companyAndPlace: '',
     duration: '',
@@ -62,13 +72,13 @@ const FacultyInternship: React.FC = () => {
 
   // Grid columns configuration
   const gridColumns = [
-    { key: 'nameOfInternship', title: 'Internship/Training', width: '25%' },
-    { key: 'companyAndPlace', title: 'Company & Place', width: '20%' },
+    { key: 'name_of_internship', title: 'Internship/Training', width: '25%' },
+    { key: 'company_and_place', title: 'Company & Place', width: '20%' },
     { key: 'duration', title: 'Duration', width: '12%' },
     { key: 'year', title: 'Year', width: '8%' },
     { key: 'outcome', title: 'Outcome', width: '20%' },
     { 
-      key: 'uploadFile', 
+      key: 'upload_file', 
       title: 'Upload', 
       width: '15%',
       render: (value: string, row: FacultyInternshipData) => (
@@ -90,58 +100,80 @@ const FacultyInternship: React.FC = () => {
     return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
   };
 
-  // Sample data
-  const sampleData: FacultyInternshipData[] = [
-    {
-      id: 1,
-      nameOfInternship: 'Industry Collaboration Program',
-      companyAndPlace: 'TechCorp Solutions, Bangalore',
-      duration: '3 months',
-      year: '2024',
-      outcome: 'Successfully completed industry training in software development methodologies and gained hands-on experience with modern technologies.',
-      uploadFile: 'internship_certificate.pdf'
-    },
-    {
-      id: 2,
-      nameOfInternship: 'Faculty Development Program',
-      companyAndPlace: 'Microsoft India, Hyderabad',
-      duration: '6 months',
-      year: '2023',
-      outcome: 'Enhanced skills in cloud computing and AI technologies, leading to improved curriculum design and student training.',
-      uploadFile: 'fdp_certificate.pdf'
+  const getStaticBaseUrl = () => {
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+    return apiUrl.replace('/api', '');
+  };
+
+  // File handling functions
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedFile(file);
+      setFilePreview(file.name);
     }
-  ];
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOver(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOver(false);
+
+    const files = e.dataTransfer.files;
+    if (files && files.length > 0) {
+      setSelectedFile(files[0]);
+      setFilePreview(files[0].name);
+    }
+  };
+
+  const handleDeleteFile = () => {
+    setSelectedFile(null);
+    setFilePreview(null);
+    setExistingFile(null);
+  };
+
 
   // Fetch data
   const fetchData = async (page = 1, search = '') => {
     setLoading(true);
     try {
-      // Simulate API call with sample data
-      setTimeout(() => {
-        const filteredData = sampleData.filter(item =>
-          item.nameOfInternship.toLowerCase().includes(search.toLowerCase()) ||
-          item.companyAndPlace.toLowerCase().includes(search.toLowerCase()) ||
-          item.outcome.toLowerCase().includes(search.toLowerCase())
-        );
-        
-        const itemsPerPage = 10;
-        const totalPages = Math.ceil(filteredData.length / itemsPerPage);
-        const startIndex = (page - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-        const paginatedData = filteredData.slice(startIndex, endIndex);
-        
-        setData(paginatedData);
+      const response = await configAPI.internshipTraining.getAll({ page, search });
+      const responseData = response.data;
+
+      if (responseData.success && Array.isArray(responseData.data)) {
+        setData(responseData.data);
         setPagination({
-          currentPage: page,
-          totalPages,
-          totalCount: filteredData.length,
-          hasNext: page < totalPages,
-          hasPrev: page > 1
+          currentPage: responseData.pagination?.currentPage || page,
+          totalPages: responseData.pagination?.totalPages || 1,
+          totalCount: responseData.pagination?.totalCount || 0,
+          hasNext: responseData.pagination?.hasNext || false,
+          hasPrev: responseData.pagination?.hasPrev || false
         });
-        setLoading(false);
-      }, 500);
-    } catch (error) {
-      setMessage({ type: 'error', text: 'Failed to fetch internship data' });
+      } else {
+        console.error('Invalid API response structure:', responseData);
+        setData([]);
+        setMessage({ type: 'error', text: 'Invalid data format received from server' });
+      }
+    } catch (error: any) {
+      console.error('Error fetching internship training data:', error);
+      setMessage({
+        type: 'error',
+        text: error.response?.data?.message || 'Failed to fetch internship training data'
+      });
+      setData([]);
+    } finally {
       setLoading(false);
     }
   };
@@ -157,12 +189,17 @@ const FacultyInternship: React.FC = () => {
 
   // Handle document view
   const handleDocumentView = (item: FacultyInternshipData) => {
-    if (item.uploadFile) {
+    console.log('handleDocumentView called with item:', item);
+    if (item.upload_file) {
+      const documentUrl = `${getStaticBaseUrl()}/uploads/internship-training/${item.upload_file}`;
+      console.log('Document URL:', documentUrl);
       setSelectedDocument({
-        url: `/uploads/internship/${item.uploadFile}`, // Adjust path as needed
-        name: item.uploadFile
+        url: documentUrl,
+        name: item.upload_file
       });
       setShowDocumentViewer(true);
+    } else {
+      console.log('No upload_file found in item');
     }
   };
 
@@ -178,39 +215,47 @@ const FacultyInternship: React.FC = () => {
     setSaving(true);
 
     try {
-      // Simulate API call
-      setTimeout(() => {
-        if (editingId) {
-          setData(prev => prev.map(item => 
-            item.id === editingId ? { ...formData, id: editingId } : item
-          ));
-          setMessage({ type: 'success', text: 'Internship updated successfully' });
-    } else {
-          const newItem = {
-            ...formData,
-            id: Date.now()
-          };
-          setData(prev => [newItem, ...prev]);
-          setMessage({ type: 'success', text: 'Internship created successfully' });
-        }
+      const formDataToSend = new FormData();
+      formDataToSend.append('nameOfInternship', formData.nameOfInternship);
+      formDataToSend.append('companyAndPlace', formData.companyAndPlace);
+      formDataToSend.append('duration', formData.duration);
+      formDataToSend.append('year', formData.year);
+      formDataToSend.append('outcome', formData.outcome);
 
-        setShowAccordion(false);
-        setEditingId(null);
-        setFormData({
-          nameOfInternship: '',
-          companyAndPlace: '',
-          duration: '',
-          year: '',
-          outcome: '',
-          uploadFile: ''
-        });
-        setFilePreview(null);
-        setExistingFile(null);
-        setSaving(false);
-        fetchData(pagination.currentPage, searchTerm);
-      }, 500);
-    } catch (error) {
-      setMessage({ type: 'error', text: 'Failed to save internship' });
+      // Add file upload if a new file is selected
+      if (selectedFile) {
+        formDataToSend.append('uploadFile', selectedFile);
+      }
+
+      if (editingId) {
+        await configAPI.internshipTraining.update(editingId.toString(), formDataToSend);
+        setMessage({ type: 'success', text: 'Internship training record updated successfully' });
+      } else {
+        await configAPI.internshipTraining.create(formDataToSend);
+        setMessage({ type: 'success', text: 'Internship training record created successfully' });
+      }
+
+      setShowAccordion(false);
+      setEditingId(null);
+      setFormData({
+        nameOfInternship: '',
+        companyAndPlace: '',
+        duration: '',
+        year: '',
+        outcome: '',
+        uploadFile: ''
+      });
+      setFilePreview(null);
+      setExistingFile(null);
+      setSelectedFile(null);
+      setSaving(false);
+      fetchData(pagination.currentPage, searchTerm);
+    } catch (error: any) {
+      console.error('Error saving internship training record:', error);
+      setMessage({
+        type: 'error',
+        text: error.response?.data?.message || 'Failed to save internship training record'
+      });
       setSaving(false);
     }
   };
@@ -234,15 +279,16 @@ const FacultyInternship: React.FC = () => {
   // Handle edit
   const handleEdit = (item: FacultyInternshipData) => {
     setFormData({
-      nameOfInternship: item.nameOfInternship,
-      companyAndPlace: item.companyAndPlace,
-      duration: item.duration,
-      year: item.year,
-      outcome: item.outcome,
-      uploadFile: item.uploadFile || ''
+      nameOfInternship: item.name_of_internship || '',
+      companyAndPlace: item.company_and_place || '',
+      duration: item.duration || '',
+      year: item.year || '',
+      outcome: item.outcome || '',
+      uploadFile: item.upload_file || ''
     });
-    setExistingFile(item.uploadFile || null);
+    setExistingFile(item.upload_file ? `${getStaticBaseUrl()}/uploads/internship-training/${item.upload_file}` : null);
     setFilePreview(null);
+    setSelectedFile(null);
     setEditingId(item.id!);
     setShowAccordion(true);
   };
@@ -251,11 +297,19 @@ const FacultyInternship: React.FC = () => {
   const handleDelete = async (id: number) => {
     if (window.confirm('Are you sure you want to delete this internship entry?')) {
       try {
-        setData(prev => prev.filter(item => item.id !== id));
-        setMessage({ type: 'success', text: 'Internship deleted successfully' });
-        fetchData(pagination.currentPage, searchTerm);
-      } catch (error) {
-        setMessage({ type: 'error', text: 'Failed to delete internship' });
+        const response = await configAPI.internshipTraining.delete(id.toString());
+        if (response.data.success) {
+          setMessage({ type: 'success', text: 'Internship training record deleted successfully' });
+          fetchData(pagination.currentPage, searchTerm);
+        } else {
+          setMessage({ type: 'error', text: response.data.message || 'Failed to delete internship training record' });
+        }
+      } catch (error: any) {
+        console.error('Error deleting internship training record:', error);
+        setMessage({
+          type: 'error',
+          text: error.response?.data?.message || error.message || 'Failed to delete internship training record'
+        });
       }
     }
   };
@@ -315,45 +369,11 @@ const FacultyInternship: React.FC = () => {
     fetchData(page, searchTerm);
   };
 
-  // Handle file change
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setFilePreview(file.name);
-    }
-  };
-
-  // Handle drag and drop
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(true);
-  };
-
-  const handleDragLeave = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(false);
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(false);
-    const file = e.dataTransfer.files[0];
-    if (file) {
-      setFilePreview(file.name);
-    }
-  };
-
-  // Handle delete file
-  const handleDeleteFile = () => {
-    setFilePreview(null);
-    setExistingFile(null);
-  };
-
   // Prepare data for Grid component
   const gridData = data.map(item => ({
     ...item,
-    nameOfInternship: item.nameOfInternship ? truncateText(item.nameOfInternship, 40) : '-',
-    companyAndPlace: item.companyAndPlace ? truncateText(item.companyAndPlace, 30) : '-',
+    name_of_internship: item.name_of_internship ? truncateText(item.name_of_internship, 40) : '-',
+    company_and_place: item.company_and_place ? truncateText(item.company_and_place, 30) : '-',
     duration: item.duration || '-',
     year: item.year || '-',
     outcome: item.outcome ? truncateText(item.outcome, 50) : '-'
@@ -557,32 +577,15 @@ const FacultyInternship: React.FC = () => {
                       existingFile={existingFile}
                       fileLoading={false}
                       isDragOver={isDragOver}
-                      onFileSelect={setSelectedFile}
-                      onFileDelete={() => {
-                        setSelectedFile(null);
-                        setFilePreview(null);
-                        setExistingFile(null);
+                      onFileSelect={(file) => {
+                        setSelectedFile(file);
+                        setFilePreview(file ? file.name : null);
                       }}
-                      onUploadClick={() => {
-                        const fileInput = document.getElementById('uploadFile') as HTMLInputElement;
-                        fileInput?.click();
-                      }}
-                      onDragOver={(e) => {
-                        e.preventDefault();
-                        setIsDragOver(true);
-                      }}
-                      onDragLeave={(e) => {
-                        e.preventDefault();
-                        setIsDragOver(false);
-                      }}
-                      onDrop={(e) => {
-                        e.preventDefault();
-                        setIsDragOver(false);
-                        const files = e.dataTransfer.files;
-                        if (files && files.length > 0) {
-                          setSelectedFile(files[0]);
-                        }
-                      }}
+                      onFileDelete={handleDeleteFile}
+                      onUploadClick={() => {}}
+                      onDragOver={handleDragOver}
+                      onDragLeave={handleDragLeave}
+                      onDrop={handleDrop}
                       accept="image/*,.pdf,.doc,.docx"
                       maxSize={5}
                     />
@@ -688,6 +691,15 @@ const FacultyInternship: React.FC = () => {
             Showing {((pagination.currentPage - 1) * 10) + 1} to {Math.min(pagination.currentPage * 10, pagination.totalCount)} of {pagination.totalCount} entries
           </div>
         </div>
+      )}
+
+      {/* Document Viewer Modal */}
+      {showDocumentViewer && selectedDocument && (
+        <DocumentViewer
+          isOpen={showDocumentViewer}
+          onClose={handleCloseDocumentViewer}
+          document={selectedDocument}
+        />
       )}
     </div>
   );

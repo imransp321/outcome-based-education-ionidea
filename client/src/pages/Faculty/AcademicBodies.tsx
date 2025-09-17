@@ -77,7 +77,7 @@ const AcademicBodies: React.FC = () => {
   // Utility function to get the correct base URL for static files
   const getStaticBaseUrl = () => {
     const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
-    return apiUrl + '/faculty';
+    return apiUrl.replace('/api', '');
   };
 
   // Grid columns configuration (replicated from Fellowship Scholarship)
@@ -365,7 +365,7 @@ const AcademicBodies: React.FC = () => {
   const handleDocumentView = (item: AcademicBodiesAPIResponse) => {
     if (item.upload_file) {
       setSelectedDocument({
-        url: `${getStaticBaseUrl()}/uploads/${item.upload_file}`,
+        url: `${getStaticBaseUrl()}/uploads/academic-bodies/${item.upload_file}`,
         name: item.upload_file
       });
       setShowDocumentViewer(true);

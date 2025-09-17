@@ -176,6 +176,37 @@ const SeminarTraining: React.FC = () => {
       key: 'role',
       title: 'Your Role',
       width: '120px'
+    },
+    {
+      key: 'actions',
+      title: 'Actions',
+      width: '120px',
+      render: (value: any, record: SeminarTrainingAPIResponse) => (
+        <div style={{ display: 'flex', gap: '8px' }}>
+          <button
+            type="button"
+            className="seminar-training-btn seminar-training-btn-secondary"
+            onClick={() => handleEdit(record)}
+            style={{ padding: '4px 8px', fontSize: '12px' }}
+          >
+            Edit
+          </button>
+          <button
+            type="button"
+            className="seminar-training-btn"
+            onClick={() => handleDelete(record.id)}
+            style={{ 
+              padding: '4px 8px', 
+              fontSize: '12px',
+              backgroundColor: '#dc2626',
+              color: '#ffffff',
+              border: '1px solid #dc2626'
+            }}
+          >
+            Delete
+          </button>
+        </div>
+      )
     }
   ];
 
@@ -296,9 +327,12 @@ const SeminarTraining: React.FC = () => {
       
       // Refresh data
       await fetchData(pagination.currentPage, searchQuery);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error saving seminar training:', error);
-      setMessage({ type: 'error', text: 'Failed to save seminar training' });
+      setMessage({ 
+        type: 'error', 
+        text: error.response?.data?.message || 'Failed to save seminar training' 
+      });
     } finally {
       setSaving(false);
     }
@@ -330,6 +364,18 @@ const SeminarTraining: React.FC = () => {
   };
 
   // Handle edit
+  // Utility function to convert ISO date to yyyy-MM-dd format
+  const formatDateForInput = (dateString: string): string => {
+    if (!dateString) return '';
+    try {
+      const date = new Date(dateString);
+      return date.toISOString().split('T')[0];
+    } catch (error) {
+      console.error('Error formatting date:', error);
+      return dateString;
+    }
+  };
+
   const handleEdit = (item: SeminarTrainingAPIResponse) => {
     setFormData({
       programTitle: item.program_title,
@@ -339,8 +385,8 @@ const SeminarTraining: React.FC = () => {
       level: item.level,
       role: item.role,
       invitedDeputed: item.invited_deputed,
-      startDate: item.start_date,
-      endDate: item.end_date,
+      startDate: formatDateForInput(item.start_date),
+      endDate: formatDateForInput(item.end_date),
       highlights: item.highlights || '',
       upload_file: item.upload_file || ''
     });
@@ -357,12 +403,21 @@ const SeminarTraining: React.FC = () => {
   const handleDelete = async (id: number) => {
     if (window.confirm('Are you sure you want to delete this seminar training entry?')) {
       try {
-        await configAPI.seminarTraining.delete(id.toString());
-        setMessage({ type: 'success', text: 'Seminar training deleted successfully' });
-        await fetchData(pagination.currentPage, searchQuery);
-      } catch (error) {
+        const response = await configAPI.seminarTraining.delete(id.toString());
+        console.log('Delete response:', response);
+        
+        if (response.data.success) {
+          setMessage({ type: 'success', text: 'Seminar training deleted successfully' });
+          await fetchData(pagination.currentPage, searchQuery);
+        } else {
+          throw new Error(response.data.message || 'Delete failed');
+        }
+      } catch (error: any) {
         console.error('Error deleting seminar training:', error);
-        setMessage({ type: 'error', text: 'Failed to delete seminar training' });
+        setMessage({ 
+          type: 'error', 
+          text: error.response?.data?.message || error.message || 'Failed to delete seminar training' 
+        });
       }
     }
   };

@@ -1,18 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import Grid from '../../components/Grid/Grid';
+import DocumentUpload from '../../components/DocumentUpload/DocumentUpload';
+import DocumentViewer from '../../components/DocumentViewer/DocumentViewer';
+import { DocumentInfo } from '../../components/DocumentViewer/types';
+import { configAPI } from '../../services/api';
 import '../../styles/pages/Configuration/Grid.css';
 import '../../styles/components/grid.css';
 import '../../styles/components/modals.css';
 
 interface EContentDevelopmentData {
   id?: number;
+  e_content_types: string;
+  name_of_course: string;
+  year: string;
+  upload_file?: string;
+  created_at?: string;
+  updated_at?: string;
+}
+
+interface EContentDevelopmentFormData {
   eContentTypes: string;
   nameOfCourse: string;
   year: string;
   uploadFile?: string;
-  created_at?: string;
-  updated_at?: string;
 }
 
 interface PaginationInfo {
@@ -39,23 +50,68 @@ const EContentDevelopment: React.FC = () => {
     hasPrev: false
   });
 
-  const [formData, setFormData] = useState<EContentDevelopmentData>({
+  const [formData, setFormData] = useState<EContentDevelopmentFormData>({
     eContentTypes: '',
     nameOfCourse: '',
     year: '',
     uploadFile: ''
   });
 
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [filePreview, setFilePreview] = useState<string | null>(null);
   const [existingFile, setExistingFile] = useState<string | null>(null);
   const [isDragOver, setIsDragOver] = useState(false);
+  const [fileInputRef] = useState(React.createRef<HTMLInputElement>());
+  const [showDocumentViewer, setShowDocumentViewer] = useState(false);
+  const [selectedDocument, setSelectedDocument] = useState<DocumentInfo | null>(null);
 
   // Grid columns configuration
   const gridColumns = [
-    { key: 'eContentTypes', title: 'E-Content Types', width: '25%' },
-    { key: 'nameOfCourse', title: 'Course Name', width: '40%' },
+    { key: 'e_content_types', title: 'E-Content Types', width: '25%' },
+    { key: 'name_of_course', title: 'Course Name', width: '35%' },
     { key: 'year', title: 'Year', width: '15%' },
-    { key: 'uploadFile', title: 'File', width: '20%' }
+    { 
+      key: 'upload_file', 
+      title: 'Document', 
+      width: '15%',
+      render: (value: string, row: EContentDevelopmentData) => (
+        value ? (
+          <button
+            className="btn btn-sm btn-outline-primary"
+            onClick={() => {
+              console.log('View button clicked for row:', row);
+              handleDocumentView(row);
+            }}
+            title="View Document"
+          >
+            📄 View
+          </button>
+        ) : '-'
+      )
+    },
+    {
+      key: 'actions',
+      title: 'Actions',
+      width: '10%',
+      render: (value: any, row: EContentDevelopmentData) => (
+        <div className="action-buttons">
+          <button
+            className="btn btn-sm btn-outline-primary me-1"
+            onClick={() => handleEdit(row)}
+            title="Edit"
+          >
+            ✏️
+          </button>
+          <button
+            className="btn btn-sm btn-outline-danger"
+            onClick={() => handleDelete(row.id!)}
+            title="Delete"
+          >
+            🗑️
+          </button>
+        </div>
+      )
+    }
   ];
 
   // Utility functions
@@ -63,54 +119,110 @@ const EContentDevelopment: React.FC = () => {
     return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
   };
 
-  // Sample data
-  const sampleData: EContentDevelopmentData[] = [
-    {
-      id: 1,
-      eContentTypes: 'SWAYAM MOOCs',
-      nameOfCourse: 'Introduction to Machine Learning',
-      year: '2024',
-      uploadFile: 'course_certificate.pdf'
-    },
-    {
-      id: 2,
-      eContentTypes: 'NPTEL',
-      nameOfCourse: 'Data Structures and Algorithms',
-      year: '2023',
-      uploadFile: 'nptel_certificate.pdf'
-    }
-  ];
+  const getStaticBaseUrl = () => {
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+    return apiUrl.replace('/api', '');
+  };
+
+  const formatDateForInput = (dateString: string): string => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    return date.toISOString().split('T')[0];
+  };
 
   // Fetch data
   const fetchData = async (page = 1, search = '') => {
     setLoading(true);
     try {
-      // Simulate API call with sample data
-      setTimeout(() => {
-        const filteredData = sampleData.filter(item =>
-          item.nameOfCourse.toLowerCase().includes(search.toLowerCase()) ||
-          item.eContentTypes.toLowerCase().includes(search.toLowerCase())
-        );
-        
-        const itemsPerPage = 10;
-        const totalPages = Math.ceil(filteredData.length / itemsPerPage);
-        const startIndex = (page - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-        const paginatedData = filteredData.slice(startIndex, endIndex);
-        
-        setData(paginatedData);
-        setPagination({
-          currentPage: page,
-          totalPages,
-          totalCount: filteredData.length,
-          hasNext: page < totalPages,
-          hasPrev: page > 1
-        });
-        setLoading(false);
-      }, 500);
-    } catch (error) {
-      setMessage({ type: 'error', text: 'Failed to fetch e-content data' });
+      const response = await configAPI.econtentDevelopment.getAll({ page, search });
+      const responseData = response.data;
+      
+      if (responseData.success) {
+        setData(responseData.data);
+        setPagination(responseData.pagination);
+      } else {
+        setMessage({ type: 'error', text: responseData.message || 'Failed to fetch e-content data' });
+      }
+    } catch (error: any) {
+      console.error('Error fetching e-content data:', error);
+      setMessage({ 
+        type: 'error', 
+        text: error.response?.data?.message || 'Failed to fetch e-content data' 
+      });
+    } finally {
       setLoading(false);
+    }
+  };
+
+  // Handle document view
+  const handleDocumentView = (item: EContentDevelopmentData) => {
+    console.log('handleDocumentView called with item:', item);
+    console.log('item.upload_file:', item.upload_file);
+    console.log('Current state before update - showDocumentViewer:', showDocumentViewer, 'selectedDocument:', selectedDocument);
+    
+    if (item.upload_file) {
+      const documentUrl = `${getStaticBaseUrl()}/uploads/econtent-development/${item.upload_file}`;
+      console.log('Document URL:', documentUrl);
+      console.log('Setting selectedDocument and showDocumentViewer');
+      
+      const newDocument = {
+        url: documentUrl,
+        name: item.upload_file
+      };
+      
+      setSelectedDocument(newDocument);
+      setShowDocumentViewer(true);
+      
+      console.log('State update called - newDocument:', newDocument);
+      console.log('Document viewer should now be visible');
+    } else {
+      console.log('No upload_file found in item');
+    }
+  };
+
+  // Handle close document viewer
+  const handleCloseDocumentViewer = () => {
+    setShowDocumentViewer(false);
+    setSelectedDocument(null);
+  };
+
+  // Handle file selection
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedFile(file);
+      setFilePreview(file.name);
+    }
+  };
+
+  // Handle drag and drop
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      setSelectedFile(file);
+      setFilePreview(file.name);
+    }
+  };
+
+  // Handle file deletion
+  const handleDeleteFile = () => {
+    setSelectedFile(null);
+    setFilePreview(null);
+    setExistingFile(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
     }
   };
 
@@ -129,37 +241,46 @@ const EContentDevelopment: React.FC = () => {
     setSaving(true);
 
     try {
-      // Simulate API call
-      setTimeout(() => {
-        if (editingId) {
-          setData(prev => prev.map(item => 
-            item.id === editingId ? { ...formData, id: editingId } : item
-          ));
-          setMessage({ type: 'success', text: 'E-content updated successfully' });
-    } else {
-          const newItem = {
-            ...formData,
-            id: Date.now()
-          };
-          setData(prev => [newItem, ...prev]);
-          setMessage({ type: 'success', text: 'E-content created successfully' });
-        }
+      const formDataToSend = new FormData();
+      formDataToSend.append('eContentTypes', formData.eContentTypes);
+      formDataToSend.append('nameOfCourse', formData.nameOfCourse);
+      formDataToSend.append('year', formData.year);
+      
+      if (selectedFile) {
+        formDataToSend.append('uploadFile', selectedFile);
+      }
 
-        setShowAccordion(false);
-        setEditingId(null);
-        setFormData({
-          eContentTypes: '',
-          nameOfCourse: '',
-          year: '',
-          uploadFile: ''
-        });
-        setFilePreview(null);
-        setExistingFile(null);
-        setSaving(false);
-        fetchData(pagination.currentPage, searchTerm);
-      }, 500);
-    } catch (error) {
-      setMessage({ type: 'error', text: 'Failed to save e-content' });
+      let response;
+      if (editingId) {
+        response = await configAPI.econtentDevelopment.update(editingId.toString(), formDataToSend);
+        setMessage({ type: 'success', text: 'E-content updated successfully' });
+      } else {
+        response = await configAPI.econtentDevelopment.create(formDataToSend);
+        setMessage({ type: 'success', text: 'E-content created successfully' });
+      }
+
+      // Reset form
+      setFormData({
+        eContentTypes: '',
+        nameOfCourse: '',
+        year: '',
+        uploadFile: ''
+      });
+      setSelectedFile(null);
+      setFilePreview(null);
+      setExistingFile(null);
+      setShowAccordion(false);
+      setEditingId(null);
+
+      // Refresh data
+      await fetchData(pagination.currentPage, searchTerm);
+    } catch (error: any) {
+      console.error('Error saving e-content:', error);
+      setMessage({ 
+        type: 'error', 
+        text: error.response?.data?.message || 'Failed to save e-content' 
+      });
+    } finally {
       setSaving(false);
     }
   };
@@ -181,13 +302,14 @@ const EContentDevelopment: React.FC = () => {
   // Handle edit
   const handleEdit = (item: EContentDevelopmentData) => {
     setFormData({
-      eContentTypes: item.eContentTypes,
-      nameOfCourse: item.nameOfCourse,
-      year: item.year,
-      uploadFile: item.uploadFile || ''
+      eContentTypes: item.e_content_types || '',
+      nameOfCourse: item.name_of_course || '',
+      year: item.year || '',
+      uploadFile: item.upload_file || ''
     });
-    setExistingFile(item.uploadFile || null);
+    setExistingFile(item.upload_file ? `${getStaticBaseUrl()}/uploads/econtent-development/${item.upload_file}` : null);
     setFilePreview(null);
+    setSelectedFile(null);
     setEditingId(item.id!);
     setShowAccordion(true);
   };
@@ -196,11 +318,19 @@ const EContentDevelopment: React.FC = () => {
   const handleDelete = async (id: number) => {
     if (window.confirm('Are you sure you want to delete this e-content entry?')) {
       try {
-        setData(prev => prev.filter(item => item.id !== id));
-        setMessage({ type: 'success', text: 'E-content deleted successfully' });
-        fetchData(pagination.currentPage, searchTerm);
-      } catch (error) {
-        setMessage({ type: 'error', text: 'Failed to delete e-content' });
+        const response = await configAPI.econtentDevelopment.delete(id.toString());
+        if (response.data.success) {
+          setMessage({ type: 'success', text: 'E-content deleted successfully' });
+          await fetchData(pagination.currentPage, searchTerm);
+        } else {
+          setMessage({ type: 'error', text: response.data.message || 'Failed to delete e-content' });
+        }
+      } catch (error: any) {
+        console.error('Error deleting e-content:', error);
+        setMessage({ 
+          type: 'error', 
+          text: error.response?.data?.message || 'Failed to delete e-content' 
+        });
       }
     }
   };
@@ -215,6 +345,7 @@ const EContentDevelopment: React.FC = () => {
       year: '',
       uploadFile: ''
     });
+    setSelectedFile(null);
     setFilePreview(null);
     setExistingFile(null);
   };
@@ -258,53 +389,26 @@ const EContentDevelopment: React.FC = () => {
     fetchData(page, searchTerm);
   };
 
-  // Handle file change
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setFilePreview(file.name);
-    }
-  };
 
-  // Handle drag and drop
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(true);
-  };
-
-  const handleDragLeave = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(false);
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(false);
-    const file = e.dataTransfer.files[0];
-    if (file) {
-      setFilePreview(file.name);
-    }
-  };
-
-  // Handle delete file
-  const handleDeleteFile = () => {
-    setFilePreview(null);
-    setExistingFile(null);
-  };
 
   // Prepare data for Grid component
   const gridData = data.map(item => ({
     ...item,
-    eContentTypes: item.eContentTypes || '-',
-    nameOfCourse: item.nameOfCourse ? truncateText(item.nameOfCourse, 50) : '-',
-    year: item.year || '-',
-    uploadFile: item.uploadFile ? '📄 View' : '-'
+    e_content_types: item.e_content_types || '-',
+    name_of_course: item.name_of_course ? truncateText(item.name_of_course, 50) : '-',
+    year: item.year || '-'
+    // Note: upload_file is kept as original filename for the button logic
   }));
 
   // Load data on component mount
   useEffect(() => {
     fetchData();
   }, []);
+
+  // Debug state changes
+  useEffect(() => {
+    console.log('State changed - showDocumentViewer:', showDocumentViewer, 'selectedDocument:', selectedDocument);
+  }, [showDocumentViewer, selectedDocument]);
 
   return (
     <div className="grid-page">
@@ -457,64 +561,39 @@ const EContentDevelopment: React.FC = () => {
                     Certificate/Document Upload
                   </label>
                   
-                  {/* Drag and Drop Area */}
-                  <div
-                    className={`book-chapter-upload-area ${isDragOver ? 'drag-over' : ''}`}
+                  <DocumentUpload
+                    selectedFile={selectedFile}
+                    filePreview={filePreview}
+                    existingFile={existingFile}
+                    fileLoading={false}
+                    isDragOver={isDragOver}
+                    onFileSelect={(file: File | null) => {
+                      setSelectedFile(file);
+                      setFilePreview(file ? file.name : null);
+                    }}
+                    onFileDelete={handleDeleteFile}
+                    onUploadClick={() => {
+                      if (fileInputRef.current) {
+                        fileInputRef.current.click();
+                      }
+                    }}
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
                     onDrop={handleDrop}
-                  >
-                    <div className="book-chapter-upload-content">
-                      {(filePreview || existingFile) ? (
-                        <div className="book-chapter-file-preview">
-                          <div className="book-chapter-file-info">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="book-chapter-file-icon">
-                              <path d="M14 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V8L14 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                              <path d="M14 2V8H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
-                            <div className="book-chapter-file-details">
-                              <span className="book-chapter-file-name">{filePreview || existingFile}</span>
-                              <span className="book-chapter-file-size">Certificate Document</span>
-                            </div>
-                          </div>
-                          <button
-                            type="button"
-                            className="book-chapter-file-delete"
-                            onClick={handleDeleteFile}
-                            title="Delete file"
-                          >
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                              <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" strokeWidth="2"/>
-                              <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" strokeWidth="2"/>
-                            </svg>
-                          </button>
-                        </div>
-                      ) : (
-                        <div className="book-chapter-upload-placeholder">
-                          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" className="book-chapter-upload-icon">
-                            <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            <path d="M17 8L12 3L7 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            <path d="M12 3V15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                          </svg>
-                          <div className="book-chapter-upload-text">
-                            <p className="book-chapter-upload-title">Drop your certificate here</p>
-                            <p className="book-chapter-upload-subtitle">Or click to browse files</p>
-                            <p className="book-chapter-upload-hint">Supported: PDF, DOC, DOCX, JPG, PNG (Max 5MB)</p>
-                          </div>
-                        </div>
-                      )}
-                    </div>
+                    accept="image/*,.pdf,.doc,.docx"
+                    maxSize={5}
+                  />
 
-                    {/* Hidden File Input */}
-                    <input
-                      type="file"
-                      id="uploadFile"
-                      name="uploadFile"
-                      className="book-chapter-file-input-hidden"
-                      accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                      onChange={handleFileChange}
-                    />
-                  </div>
+                  {/* Hidden File Input */}
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    id="uploadFile"
+                    name="uploadFile"
+                    className="book-chapter-file-input-hidden"
+                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                    onChange={handleFileChange}
+                  />
                 </div>
 
               </form>
@@ -618,6 +697,21 @@ const EContentDevelopment: React.FC = () => {
           <div className="pagination-info">
             Showing {((pagination.currentPage - 1) * 10) + 1} to {Math.min(pagination.currentPage * 10, pagination.totalCount)} of {pagination.totalCount} entries
           </div>
+        </div>
+      )}
+
+      {/* Document Viewer Modal */}
+      <DocumentViewer
+        isOpen={showDocumentViewer}
+        onClose={handleCloseDocumentViewer}
+        document={selectedDocument}
+      />
+      
+      {/* Debug info */}
+      {process.env.NODE_ENV === 'development' && (
+        <div style={{ position: 'fixed', top: 0, right: 0, background: 'black', color: 'white', padding: '10px', zIndex: 9999, fontSize: '12px' }}>
+          <div>showDocumentViewer: {showDocumentViewer.toString()}</div>
+          <div>selectedDocument: {selectedDocument ? JSON.stringify(selectedDocument) : 'null'}</div>
         </div>
       )}
     </div>

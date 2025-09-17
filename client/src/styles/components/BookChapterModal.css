@@ -196,6 +196,157 @@
   cursor: not-allowed;
 }
 
+/* Rich Text Editor Styles */
+.book-chapter-rich-text-editor {
+  border: 2px solid #e1e8ed;
+  border-radius: 8px;
+  background: #ffffff;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.book-chapter-rich-text-editor:focus-within {
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.book-chapter-editor-toolbar {
+  background: #f8f9fa;
+  border-bottom: 1px solid #e1e8ed;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.book-chapter-toolbar-section {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.book-chapter-toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.book-chapter-toolbar-divider {
+  width: 1px;
+  height: 24px;
+  background: #dee2e6;
+  margin: 0 8px;
+}
+
+.book-chapter-toolbar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #6c757d;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.book-chapter-toolbar-btn:hover {
+  background: #e9ecef;
+  color: #495057;
+}
+
+.book-chapter-toolbar-btn:active {
+  background: #dee2e6;
+  transform: scale(0.95);
+}
+
+.book-chapter-toolbar-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.book-chapter-editor-content {
+  min-height: 200px;
+  padding: 16px;
+  font-family: 'Calibri', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #2c3e50;
+  outline: none;
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+.book-chapter-editor-content:empty:before {
+  content: attr(data-placeholder);
+  color: #adb5bd;
+  font-style: italic;
+  pointer-events: none;
+}
+
+.book-chapter-editor-content:focus {
+  outline: none;
+}
+
+.book-chapter-editor-content p {
+  margin: 0 0 8px 0;
+}
+
+.book-chapter-editor-content ul,
+.book-chapter-editor-content ol {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.book-chapter-editor-content li {
+  margin: 4px 0;
+}
+
+.book-chapter-editor-content a {
+  color: #3498db;
+  text-decoration: underline;
+}
+
+.book-chapter-editor-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin: 8px 0;
+}
+
+.book-chapter-editor-footer {
+  background: #f8f9fa;
+  border-top: 1px solid #e1e8ed;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.book-chapter-editor-stats {
+  display: flex;
+  gap: 16px;
+}
+
+.book-chapter-word-count,
+.book-chapter-char-count {
+  font-family: 'Calibri', sans-serif;
+  font-weight: 500;
+}
+
+.book-chapter-editor-format {
+  font-family: 'Calibri', sans-serif;
+  font-weight: 500;
+  color: #495057;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .book-chapter-modal-enhanced {
@@ -212,5 +363,25 @@
   .book-chapter-form-left,
   .book-chapter-form-right {
     gap: 16px;
+  }
+
+  .book-chapter-editor-toolbar {
+    padding: 6px 8px;
+  }
+
+  .book-chapter-toolbar-btn {
+    width: 28px;
+    height: 28px;
+  }
+
+  .book-chapter-toolbar-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .book-chapter-editor-content {
+    min-height: 150px;
+    padding: 12px;
+    font-size: 13px;
   }
 }

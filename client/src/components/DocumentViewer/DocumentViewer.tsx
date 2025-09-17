@@ -27,6 +27,8 @@ const DocumentViewer: React.FC<DocumentViewerProps> = ({
   onClose,
   document
 }) => {
+  console.log('DocumentViewer rendered with props:', { isOpen, document });
+  
   // Document viewer states
   const [documentLoadError, setDocumentLoadError] = useState(false);
   const [documentLoading, setDocumentLoading] = useState(false);
@@ -166,8 +168,11 @@ const DocumentViewer: React.FC<DocumentViewerProps> = ({
   }, [isOpen, onClose]);
 
   if (!isOpen || !document) {
+    console.log('DocumentViewer returning null - isOpen:', isOpen, 'document:', document);
     return null;
   }
+  
+  console.log('DocumentViewer rendering modal for document:', document);
 
   const isPDF = document.name.toLowerCase().endsWith('.pdf');
   const isDOCX = document.name.match(/\.(docx|doc)$/i);

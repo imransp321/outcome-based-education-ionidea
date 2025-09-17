@@ -1,5 +1,32 @@
 /* Common Grid Styles - Reusable across application */
 
+/* Profile Photo Styles */
+.profile-photo-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-photo-thumb {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e5e7eb;
+}
+
+.profile-photo-placeholder {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  border: 2px solid #e5e7eb;
+}
+
 /* Grid Container */
 .grid-container {
   background: #ffffff;

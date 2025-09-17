@@ -13,10 +13,20 @@ interface AwardsHonorsData {
   upload_file?: string;
 }
 
+interface AwardsHonorsFormData {
+  awarded_name: string;
+  awarded_for: string;
+  awarded_organization: string;
+  awarded_year: string;
+  venue: string;
+  award_details: string;
+  upload_file?: File | string;
+}
+
 interface AwardsHonorsModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (data: AwardsHonorsData) => void;
+  onSave: (data: AwardsHonorsFormData) => void;
   editingItem?: AwardsHonorsData | null;
 }
 
@@ -26,7 +36,7 @@ const AwardsHonorsModal: React.FC<AwardsHonorsModalProps> = ({
   onSave,
   editingItem
 }) => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<AwardsHonorsFormData>({
     awarded_name: '',
     awarded_for: '',
     awarded_organization: '',
@@ -74,7 +84,7 @@ const AwardsHonorsModal: React.FC<AwardsHonorsModalProps> = ({
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleInputChange = (field: string, value: string) => {
+  const handleInputChange = (field: string, value: string | File) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
@@ -95,8 +105,7 @@ const AwardsHonorsModal: React.FC<AwardsHonorsModalProps> = ({
       return;
     }
 
-    const newItem: AwardsHonorsData = {
-      id: editingItem ? editingItem.id : Date.now(),
+    const newItem: AwardsHonorsFormData = {
       awarded_name: formData.awarded_name,
       awarded_for: formData.awarded_for,
       awarded_organization: formData.awarded_organization,
@@ -386,7 +395,7 @@ const AwardsHonorsModal: React.FC<AwardsHonorsModalProps> = ({
                     if (files.length > 0) {
                       const file = files[0];
                       if (file) {
-                        handleInputChange('upload_file', file.name);
+                        handleInputChange('upload_file', file);
                       }
                     }
                   }}
@@ -407,7 +416,7 @@ const AwardsHonorsModal: React.FC<AwardsHonorsModalProps> = ({
                   onChange={(e) => {
                     const file = e.target.files?.[0];
                     if (file) {
-                      handleInputChange('upload_file', file.name);
+                      handleInputChange('upload_file', file);
                     }
                   }}
                   className="file-input"
@@ -415,7 +424,7 @@ const AwardsHonorsModal: React.FC<AwardsHonorsModalProps> = ({
                 />
                 {formData.upload_file && (
                   <div className="file-selected">
-                    <span className="file-name">Selected: {formData.upload_file}</span>
+                    <span className="file-name">Selected: {typeof formData.upload_file === 'string' ? formData.upload_file : formData.upload_file.name}</span>
                     <button 
                       type="button" 
                       className="remove-file"

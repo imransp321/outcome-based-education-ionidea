@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Grid from '../../components/Grid/Grid';
+import { configAPI } from '../../services/api';
 import '../../styles/pages/Configuration/Grid.css';
 import '../../styles/components/grid.css';
 import '../../styles/components/modals.css';
@@ -8,12 +9,20 @@ import '../../styles/components/SharedModal.css';
 
 interface TechnicalTalkData {
   id?: number;
+  topic_of_lecture: string;
+  nationality: string;
+  date: string;
+  institution: string;
+  upload_file?: string;
+  created_at?: string;
+  updated_at?: string;
+}
+
+interface TechnicalTalkFormData {
   topicOfLecture: string;
   nationality: string;
   date: string;
   institution: string;
-  created_at?: string;
-  updated_at?: string;
 }
 
 interface PaginationInfo {
@@ -40,7 +49,7 @@ const TechnicalTalk: React.FC = () => {
     hasPrev: false
   });
 
-  const [formData, setFormData] = useState<TechnicalTalkData>({
+  const [formData, setFormData] = useState<TechnicalTalkFormData>({
     topicOfLecture: '',
     nationality: 'National',
     date: '',
@@ -49,7 +58,7 @@ const TechnicalTalk: React.FC = () => {
 
   // Grid columns configuration
   const gridColumns = [
-    { key: 'topicOfLecture', title: 'Topic of Lecture', width: '40%' },
+    { key: 'topic_of_lecture', title: 'Topic of Lecture', width: '40%' },
     { key: 'nationality', title: 'National/International', width: '20%' },
     { key: 'date', title: 'Date', width: '15%' },
     { key: 'institution', title: 'Institution', width: '25%' }
@@ -60,54 +69,36 @@ const TechnicalTalk: React.FC = () => {
     return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
   };
 
-  // Sample data
-  const sampleData: TechnicalTalkData[] = [
-    {
-      id: 1,
-      topicOfLecture: 'Topic of lecture',
-      nationality: 'National',
-      date: '2025-01-06',
-      institution: 'Institution'
-    },
-    {
-      id: 2,
-      topicOfLecture: 'Fundamentals of Curriculum in Engineering Edu',
-      nationality: 'National',
-      date: '2018-01-07',
-      institution: 'Ionidea Institute of Technology and Managemen'
-    }
-  ];
 
   // Fetch data
   const fetchData = async (page = 1, search = '') => {
     setLoading(true);
     try {
-      // Simulate API call with sample data
-      setTimeout(() => {
-        const filteredData = sampleData.filter(item =>
-          item.topicOfLecture.toLowerCase().includes(search.toLowerCase()) ||
-          item.institution.toLowerCase().includes(search.toLowerCase()) ||
-          item.nationality.toLowerCase().includes(search.toLowerCase())
-        );
-        
-        const itemsPerPage = 10;
-        const totalPages = Math.ceil(filteredData.length / itemsPerPage);
-        const startIndex = (page - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-        const paginatedData = filteredData.slice(startIndex, endIndex);
-        
-        setData(paginatedData);
+      const response = await configAPI.technicalTalks.getAll({ page, search });
+      const responseData = response.data;
+
+      if (responseData.success && Array.isArray(responseData.data)) {
+        setData(responseData.data);
         setPagination({
-          currentPage: page,
-          totalPages,
-          totalCount: filteredData.length,
-          hasNext: page < totalPages,
-          hasPrev: page > 1
+          currentPage: responseData.pagination?.currentPage || page,
+          totalPages: responseData.pagination?.totalPages || 1,
+          totalCount: responseData.pagination?.totalCount || 0,
+          hasNext: responseData.pagination?.hasNext || false,
+          hasPrev: responseData.pagination?.hasPrev || false
         });
-        setLoading(false);
-      }, 500);
-    } catch (error) {
-      setMessage({ type: 'error', text: 'Failed to fetch technical talk data' });
+      } else {
+        console.error('Invalid API response structure:', responseData);
+        setData([]);
+        setMessage({ type: 'error', text: 'Invalid data format received from server' });
+      }
+    } catch (error: any) {
+      console.error('Error fetching technical talks:', error);
+      setMessage({ 
+        type: 'error', 
+        text: error.response?.data?.message || 'Failed to fetch technical talk data' 
+      });
+      setData([]);
+    } finally {
       setLoading(false);
     }
   };
@@ -127,35 +118,36 @@ const TechnicalTalk: React.FC = () => {
     setSaving(true);
 
     try {
-      // Simulate API call
-      setTimeout(() => {
-        if (editingId) {
-          setData(prev => prev.map(item => 
-            item.id === editingId ? { ...formData, id: editingId } : item
-          ));
-          setMessage({ type: 'success', text: 'Technical talk updated successfully' });
-        } else {
-          const newItem = {
-            ...formData,
-            id: Date.now()
-          };
-          setData(prev => [newItem, ...prev]);
-          setMessage({ type: 'success', text: 'Technical talk created successfully' });
-        }
+      const formDataToSend = new FormData();
+      formDataToSend.append('topicOfLecture', formData.topicOfLecture);
+      formDataToSend.append('nationality', formData.nationality);
+      formDataToSend.append('date', formData.date);
+      formDataToSend.append('institution', formData.institution);
 
-        setShowAccordion(false);
-        setEditingId(null);
-        setFormData({
-          topicOfLecture: '',
-          nationality: 'National',
-          date: '',
-          institution: ''
-        });
-        setSaving(false);
-        fetchData(pagination.currentPage, searchTerm);
-      }, 500);
-    } catch (error) {
-      setMessage({ type: 'error', text: 'Failed to save technical talk' });
+      if (editingId) {
+        await configAPI.technicalTalks.update(editingId.toString(), formDataToSend);
+        setMessage({ type: 'success', text: 'Technical talk updated successfully' });
+      } else {
+        await configAPI.technicalTalks.create(formDataToSend);
+        setMessage({ type: 'success', text: 'Technical talk created successfully' });
+      }
+
+      setShowAccordion(false);
+      setEditingId(null);
+      setFormData({
+        topicOfLecture: '',
+        nationality: 'National',
+        date: '',
+        institution: ''
+      });
+      setSaving(false);
+      fetchData(pagination.currentPage, searchTerm);
+    } catch (error: any) {
+      console.error('Error saving technical talk:', error);
+      setMessage({ 
+        type: 'error', 
+        text: error.response?.data?.message || 'Failed to save technical talk' 
+      });
       setSaving(false);
     }
   };
@@ -173,12 +165,24 @@ const TechnicalTalk: React.FC = () => {
   };
 
   // Handle edit
+  // Utility function to convert ISO date to yyyy-MM-dd format
+  const formatDateForInput = (dateString: string): string => {
+    if (!dateString) return '';
+    try {
+      const date = new Date(dateString);
+      return date.toISOString().split('T')[0];
+    } catch (error) {
+      console.error('Error formatting date:', error);
+      return dateString;
+    }
+  };
+
   const handleEdit = (item: TechnicalTalkData) => {
     setFormData({
-      topicOfLecture: item.topicOfLecture,
-      nationality: item.nationality,
-      date: item.date,
-      institution: item.institution
+      topicOfLecture: item.topic_of_lecture || '',
+      nationality: item.nationality || 'National',
+      date: formatDateForInput(item.date),
+      institution: item.institution || ''
     });
     setEditingId(item.id!);
     setShowAccordion(true);
@@ -188,11 +192,19 @@ const TechnicalTalk: React.FC = () => {
   const handleDelete = async (id: number) => {
     if (window.confirm('Are you sure you want to delete this technical talk entry?')) {
       try {
-        setData(prev => prev.filter(item => item.id !== id));
-        setMessage({ type: 'success', text: 'Technical talk deleted successfully' });
-        fetchData(pagination.currentPage, searchTerm);
-      } catch (error) {
-        setMessage({ type: 'error', text: 'Failed to delete technical talk' });
+        const response = await configAPI.technicalTalks.delete(id.toString());
+        if (response.data.success) {
+          setMessage({ type: 'success', text: 'Technical talk deleted successfully' });
+          fetchData(pagination.currentPage, searchTerm);
+        } else {
+          setMessage({ type: 'error', text: response.data.message || 'Failed to delete technical talk' });
+        }
+      } catch (error: any) {
+        console.error('Error deleting technical talk:', error);
+        setMessage({ 
+          type: 'error', 
+          text: error.response?.data?.message || error.message || 'Failed to delete technical talk' 
+        });
       }
     }
   };
@@ -251,7 +263,7 @@ const TechnicalTalk: React.FC = () => {
   // Prepare data for Grid component
   const gridData = data.map(item => ({
     ...item,
-    topicOfLecture: item.topicOfLecture ? truncateText(item.topicOfLecture, 50) : '-',
+    topic_of_lecture: item.topic_of_lecture ? truncateText(item.topic_of_lecture, 50) : '-',
     nationality: item.nationality || '-',
     date: item.date || '-',
     institution: item.institution ? truncateText(item.institution, 40) : '-'

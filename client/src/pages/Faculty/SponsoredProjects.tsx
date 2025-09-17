@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import Grid from '../../components/Grid/Grid';
+import { configAPI } from '../../services/api';
+import DocumentViewer from '../../components/DocumentViewer/DocumentViewer';
 import '../../styles/pages/Configuration/Grid.css';
 import '../../styles/components/grid.css';
 import '../../styles/components/modals.css';
@@ -8,6 +10,24 @@ import '../../styles/components/SharedModal.css';
 
 interface SponsoredProjectsData {
   id?: number;
+  project_type: string;
+  project_title: string;
+  year_of_sanction: string;
+  principal_investigator: string;
+  co_investigator: string;
+  amount: string; // Database returns as string
+  status: string;
+  duration: number;
+  sponsoring_organization: string;
+  collaborating_organization: string;
+  sanctioned_department: string;
+  description: string;
+  upload_file?: string;
+  created_at?: string;
+  updated_at?: string;
+}
+
+interface SponsoredProjectsFormData {
   projectType: string;
   projectTitle: string;
   yearOfSanction: string;
@@ -20,9 +40,7 @@ interface SponsoredProjectsData {
   collaboratingOrganization: string;
   sanctionedDepartment: string;
   description: string;
-  uploadFile?: string;
-  created_at?: string;
-  updated_at?: string;
+  uploadFile: string;
 }
 
 interface PaginationInfo {
@@ -49,7 +67,7 @@ const SponsoredProjects: React.FC = () => {
     hasPrev: false
   });
 
-  const [formData, setFormData] = useState<SponsoredProjectsData>({
+  const [formData, setFormData] = useState<SponsoredProjectsFormData>({
     projectType: 'Sponsored Project',
     projectTitle: '',
     yearOfSanction: '',
@@ -65,17 +83,105 @@ const SponsoredProjects: React.FC = () => {
     uploadFile: ''
   });
 
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [filePreview, setFilePreview] = useState<string | null>(null);
   const [existingFile, setExistingFile] = useState<string | null>(null);
   const [isDragOver, setIsDragOver] = useState(false);
+  const [showDocumentViewer, setShowDocumentViewer] = useState(false);
+  const [selectedDocument, setSelectedDocument] = useState<{ url: string; name: string } | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Utility function to get the correct base URL for static files
+  const getStaticBaseUrl = () => {
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+    return apiUrl.replace('/api', '');
+  };
+
+  // Handle document view
+  const handleDocumentView = (item: any) => {
+    if (item.upload_file) {
+      setSelectedDocument({
+        url: `${getStaticBaseUrl()}/uploads/sponsored-projects/${item.upload_file}`,
+        name: item.upload_file
+      });
+      setShowDocumentViewer(true);
+    }
+  };
+
+  // Handle close document viewer
+  const handleCloseDocumentViewer = () => {
+    setShowDocumentViewer(false);
+    setSelectedDocument(null);
+  };
 
   // Grid columns configuration
   const gridColumns = [
-    { key: 'projectTitle', title: 'Project Title', width: '30%' },
-    { key: 'principalInvestigator', title: 'Principal Investigator', width: '20%' },
-    { key: 'sponsoringOrganization', title: 'Sponsoring Organization', width: '20%' },
-    { key: 'status', title: 'Status', width: '15%' },
-    { key: 'amount', title: 'Amount', width: '15%' }
+    { key: 'project_title', title: 'Project Title', width: '20%' },
+    { key: 'principal_investigator', title: 'Principal Investigator', width: '15%' },
+    { key: 'sponsoring_organization', title: 'Sponsoring Organization', width: '15%' },
+    { key: 'status', title: 'Status', width: '10%' },
+    { key: 'amount', title: 'Amount', width: '10%' },
+    {
+      key: 'document',
+      title: 'Document',
+      width: '10%',
+      render: (value: any, record: any) => (
+        <div>
+          {record.upload_file ? (
+            <button
+              type="button"
+              className="btn btn-outline"
+              onClick={() => handleDocumentView(record)}
+              style={{ 
+                padding: '4px 8px', 
+                fontSize: '12px',
+                backgroundColor: '#3b82f6',
+                color: '#ffffff',
+                border: '1px solid #3b82f6',
+                borderRadius: '4px',
+                cursor: 'pointer'
+              }}
+              title="View Document"
+            >
+              View
+            </button>
+          ) : (
+            <span style={{ color: '#6b7280', fontSize: '12px' }}>No document</span>
+          )}
+        </div>
+      )
+    },
+    {
+      key: 'actions',
+      title: 'Actions',
+      width: '20%',
+      render: (value: any, record: any) => (
+        <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
+          <button
+            type="button"
+            className="btn btn-outline"
+            onClick={() => handleEdit(record)}
+            style={{ padding: '4px 6px', fontSize: '11px' }}
+          >
+            Edit
+          </button>
+          <button
+            type="button"
+            className="btn btn-danger"
+            onClick={() => handleDelete(record.id!)}
+            style={{ 
+              padding: '4px 6px', 
+              fontSize: '11px',
+              backgroundColor: '#dc2626',
+              color: '#ffffff',
+              border: '1px solid #dc2626'
+            }}
+          >
+            Delete
+          </button>
+        </div>
+      )
+    }
   ];
 
   // Utility functions
@@ -87,35 +193,35 @@ const SponsoredProjects: React.FC = () => {
   const sampleData: SponsoredProjectsData[] = [
     {
       id: 1,
-      projectType: 'Sponsored Project',
-      projectTitle: 'AI-Powered Learning Analytics for Educational Assessment',
-      yearOfSanction: '2023',
-      principalInvestigator: 'Dr. John Smith',
-      coInvestigator: 'Dr. Jane Doe, Dr. Michael Johnson',
-      amount: 2500000,
+      project_type: 'Sponsored Project',
+      project_title: 'AI-Powered Learning Analytics for Educational Assessment',
+      year_of_sanction: '2023',
+      principal_investigator: 'Dr. John Smith',
+      co_investigator: 'Dr. Jane Doe, Dr. Michael Johnson',
+      amount: '2500000',
       status: 'On Going',
       duration: 36,
-      sponsoringOrganization: 'Department of Science and Technology',
-      collaboratingOrganization: 'IIT Delhi, University of California',
-      sanctionedDepartment: 'Computer Science and Engineering',
+      sponsoring_organization: 'Department of Science and Technology',
+      collaborating_organization: 'IIT Delhi, University of California',
+      sanctioned_department: 'Computer Science and Engineering',
       description: 'Development of AI algorithms for student performance prediction and learning analytics.',
-      uploadFile: 'project_sanction_letter.pdf'
+      upload_file: 'project_sanction_letter.pdf'
     },
     {
       id: 2,
-      projectType: 'Consultancy Work',
-      projectTitle: 'Industry 4.0 Implementation for Manufacturing',
-      yearOfSanction: '2024',
-      principalInvestigator: 'Dr. Sarah Wilson',
-      coInvestigator: 'Dr. Robert Brown',
-      amount: 500000,
+      project_type: 'Consultancy Work',
+      project_title: 'Industry 4.0 Implementation for Manufacturing',
+      year_of_sanction: '2024',
+      principal_investigator: 'Dr. Sarah Wilson',
+      co_investigator: 'Dr. Robert Brown',
+      amount: '500000',
       status: 'Completed',
       duration: 12,
-      sponsoringOrganization: 'ABC Manufacturing Ltd.',
-      collaboratingOrganization: 'XYZ Technologies',
-      sanctionedDepartment: 'Mechanical Engineering',
+      sponsoring_organization: 'ABC Manufacturing Ltd.',
+      collaborating_organization: 'XYZ Technologies',
+      sanctioned_department: 'Mechanical Engineering',
       description: 'Consultancy project for implementing Industry 4.0 technologies in manufacturing processes.',
-      uploadFile: 'consultancy_agreement.pdf'
+      upload_file: 'consultancy_agreement.pdf'
     }
   ];
 
@@ -123,32 +229,31 @@ const SponsoredProjects: React.FC = () => {
   const fetchData = async (page = 1, search = '') => {
     setLoading(true);
     try {
-      // Simulate API call with sample data
-      setTimeout(() => {
-        const filteredData = sampleData.filter(item =>
-          item.projectTitle.toLowerCase().includes(search.toLowerCase()) ||
-          item.principalInvestigator.toLowerCase().includes(search.toLowerCase()) ||
-          item.sponsoringOrganization.toLowerCase().includes(search.toLowerCase())
-        );
-        
-        const itemsPerPage = 10;
-        const totalPages = Math.ceil(filteredData.length / itemsPerPage);
-        const startIndex = (page - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-        const paginatedData = filteredData.slice(startIndex, endIndex);
-        
-        setData(paginatedData);
+      const response = await configAPI.sponsoredProjects.getAll({ page, search });
+      const responseData = response.data;
+
+      if (responseData.success && Array.isArray(responseData.data)) {
+        setData(responseData.data);
         setPagination({
-          currentPage: page,
-          totalPages,
-          totalCount: filteredData.length,
-          hasNext: page < totalPages,
-          hasPrev: page > 1
+          currentPage: responseData.pagination?.currentPage || page,
+          totalPages: responseData.pagination?.totalPages || 1,
+          totalCount: responseData.pagination?.totalCount || 0,
+          hasNext: responseData.pagination?.hasNext || false,
+          hasPrev: responseData.pagination?.hasPrev || false
         });
-        setLoading(false);
-      }, 500);
-    } catch (error) {
-      setMessage({ type: 'error', text: 'Failed to fetch sponsored projects data' });
+      } else {
+        console.error('Invalid API response structure:', responseData);
+        setData([]);
+        setMessage({ type: 'error', text: 'Invalid data format received from server' });
+      }
+    } catch (error: any) {
+      console.error('Error fetching sponsored projects:', error);
+      setMessage({ 
+        type: 'error', 
+        text: error.response?.data?.message || 'Failed to fetch sponsored projects' 
+      });
+      setData([]);
+    } finally {
       setLoading(false);
     }
   };
@@ -168,46 +273,61 @@ const SponsoredProjects: React.FC = () => {
     setSaving(true);
 
     try {
-      // Simulate API call
-      setTimeout(() => {
-        if (editingId) {
-          setData(prev => prev.map(item => 
-            item.id === editingId ? { ...formData, id: editingId } : item
-          ));
-          setMessage({ type: 'success', text: 'Sponsored project updated successfully' });
-        } else {
-          const newItem = {
-            ...formData,
-            id: Date.now()
-          };
-          setData(prev => [newItem, ...prev]);
-          setMessage({ type: 'success', text: 'Sponsored project created successfully' });
-        }
+      const formDataToSend = new FormData();
+      formDataToSend.append('projectType', formData.projectType);
+      formDataToSend.append('projectTitle', formData.projectTitle);
+      formDataToSend.append('yearOfSanction', formData.yearOfSanction);
+      formDataToSend.append('principalInvestigator', formData.principalInvestigator);
+      formDataToSend.append('coInvestigator', formData.coInvestigator);
+      formDataToSend.append('amount', formData.amount.toString());
+      formDataToSend.append('status', formData.status);
+      formDataToSend.append('duration', formData.duration.toString());
+      formDataToSend.append('sponsoringOrganization', formData.sponsoringOrganization);
+      formDataToSend.append('collaboratingOrganization', formData.collaboratingOrganization);
+      formDataToSend.append('sanctionedDepartment', formData.sanctionedDepartment);
+      formDataToSend.append('description', formData.description);
 
-        setShowAccordion(false);
-        setEditingId(null);
-        setFormData({
-          projectType: 'Sponsored Project',
-          projectTitle: '',
-          yearOfSanction: '',
-          principalInvestigator: '',
-          coInvestigator: '',
-          amount: 0,
-          status: 'On Going',
-          duration: 0,
-          sponsoringOrganization: '',
-          collaboratingOrganization: '',
-          sanctionedDepartment: '',
-          description: '',
-          uploadFile: ''
-        });
-        setFilePreview(null);
-        setExistingFile(null);
-        setSaving(false);
-        fetchData(pagination.currentPage, searchTerm);
-      }, 500);
-    } catch (error) {
-      setMessage({ type: 'error', text: 'Failed to save sponsored project' });
+      // Add file upload if a new file is selected
+      if (selectedFile) {
+        formDataToSend.append('uploadFile', selectedFile);
+      }
+
+      if (editingId) {
+        await configAPI.sponsoredProjects.update(editingId.toString(), formDataToSend);
+        setMessage({ type: 'success', text: 'Sponsored project updated successfully' });
+      } else {
+        await configAPI.sponsoredProjects.create(formDataToSend);
+        setMessage({ type: 'success', text: 'Sponsored project created successfully' });
+      }
+
+      setShowAccordion(false);
+      setEditingId(null);
+      setFormData({
+        projectType: 'Sponsored Project',
+        projectTitle: '',
+        yearOfSanction: '',
+        principalInvestigator: '',
+        coInvestigator: '',
+        amount: 0,
+        status: 'On Going',
+        duration: 0,
+        sponsoringOrganization: '',
+        collaboratingOrganization: '',
+        sanctionedDepartment: '',
+        description: '',
+        uploadFile: ''
+      });
+      setSelectedFile(null);
+      setFilePreview(null);
+      setExistingFile(null);
+      setSaving(false);
+      fetchData(pagination.currentPage, searchTerm);
+    } catch (error: any) {
+      console.error('Error saving sponsored project:', error);
+      setMessage({ 
+        type: 'error', 
+        text: error.response?.data?.message || 'Failed to save sponsored project' 
+      });
       setSaving(false);
     }
   };
@@ -229,6 +349,7 @@ const SponsoredProjects: React.FC = () => {
       description: '',
       uploadFile: ''
     });
+    setSelectedFile(null);
     setFilePreview(null);
     setExistingFile(null);
     setEditingId(null);
@@ -236,23 +357,24 @@ const SponsoredProjects: React.FC = () => {
   };
 
   // Handle edit
-  const handleEdit = (item: SponsoredProjectsData) => {
+  const handleEdit = (item: any) => {
     setFormData({
-      projectType: item.projectType,
-      projectTitle: item.projectTitle,
-      yearOfSanction: item.yearOfSanction,
-      principalInvestigator: item.principalInvestigator,
-      coInvestigator: item.coInvestigator,
-      amount: item.amount,
-      status: item.status,
-      duration: item.duration,
-      sponsoringOrganization: item.sponsoringOrganization,
-      collaboratingOrganization: item.collaboratingOrganization,
-      sanctionedDepartment: item.sanctionedDepartment,
-      description: item.description,
-      uploadFile: item.uploadFile || ''
+      projectType: item.project_type || 'Sponsored Project',
+      projectTitle: item.project_title || '',
+      yearOfSanction: item.year_of_sanction || '',
+      principalInvestigator: item.principal_investigator || '',
+      coInvestigator: item.co_investigator || '',
+      amount: parseFloat(item.amount) || 0,
+      status: item.status || 'On Going',
+      duration: item.duration || 0,
+      sponsoringOrganization: item.sponsoring_organization || '',
+      collaboratingOrganization: item.collaborating_organization || '',
+      sanctionedDepartment: item.sanctioned_department || '',
+      description: item.description || '',
+      uploadFile: item.upload_file || ''
     });
-    setExistingFile(item.uploadFile || null);
+    setSelectedFile(null);
+    setExistingFile(item.upload_file ? `${getStaticBaseUrl()}/uploads/sponsored-projects/${item.upload_file}` : null);
     setFilePreview(null);
     setEditingId(item.id!);
     setShowAccordion(true);
@@ -262,11 +384,19 @@ const SponsoredProjects: React.FC = () => {
   const handleDelete = async (id: number) => {
     if (window.confirm('Are you sure you want to delete this sponsored project entry?')) {
       try {
-        setData(prev => prev.filter(item => item.id !== id));
-        setMessage({ type: 'success', text: 'Sponsored project deleted successfully' });
-        fetchData(pagination.currentPage, searchTerm);
-      } catch (error) {
-        setMessage({ type: 'error', text: 'Failed to delete sponsored project' });
+        const response = await configAPI.sponsoredProjects.delete(id.toString());
+        if (response.data.success) {
+          setMessage({ type: 'success', text: 'Sponsored project deleted successfully' });
+          fetchData(pagination.currentPage, searchTerm);
+        } else {
+          setMessage({ type: 'error', text: response.data.message || 'Failed to delete sponsored project' });
+        }
+      } catch (error: any) {
+        console.error('Error deleting sponsored project:', error);
+        setMessage({ 
+          type: 'error', 
+          text: error.response?.data?.message || 'Failed to delete sponsored project' 
+        });
       }
     }
   };
@@ -337,6 +467,7 @@ const SponsoredProjects: React.FC = () => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      setSelectedFile(file);
       setFilePreview(file.name);
     }
   };
@@ -357,12 +488,14 @@ const SponsoredProjects: React.FC = () => {
     setIsDragOver(false);
     const file = e.dataTransfer.files[0];
     if (file) {
+      setSelectedFile(file);
       setFilePreview(file.name);
     }
   };
 
   // Handle delete file
   const handleDeleteFile = () => {
+    setSelectedFile(null);
     setFilePreview(null);
     setExistingFile(null);
   };
@@ -370,11 +503,11 @@ const SponsoredProjects: React.FC = () => {
   // Prepare data for Grid component
   const gridData = data.map(item => ({
     ...item,
-    projectTitle: item.projectTitle ? truncateText(item.projectTitle, 40) : '-',
-    principalInvestigator: item.principalInvestigator || '-',
-    sponsoringOrganization: item.sponsoringOrganization ? truncateText(item.sponsoringOrganization, 30) : '-',
+    project_title: item.project_title ? truncateText(item.project_title, 40) : '-',
+    principal_investigator: item.principal_investigator || '-',
+    sponsoring_organization: item.sponsoring_organization ? truncateText(item.sponsoring_organization, 30) : '-',
     status: item.status || '-',
-    amount: item.amount ? `₹${item.amount.toLocaleString()}` : '-'
+    amount: item.amount ? `₹${parseFloat(item.amount).toLocaleString()}` : '-'
   }));
 
   // Load data on component mount
@@ -716,6 +849,9 @@ const SponsoredProjects: React.FC = () => {
                         onDragOver={handleDragOver}
                         onDragLeave={handleDragLeave}
                         onDrop={handleDrop}
+                        onClick={() => {
+                          fileInputRef.current?.click();
+                        }}
                       >
                         <div className="book-chapter-upload-content">
                           {(filePreview || existingFile) ? (
@@ -759,6 +895,7 @@ const SponsoredProjects: React.FC = () => {
 
                         {/* Hidden File Input */}
                         <input
+                          ref={fileInputRef}
                           type="file"
                           id="uploadFile"
                           name="uploadFile"
@@ -877,6 +1014,13 @@ const SponsoredProjects: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* Document Viewer */}
+      <DocumentViewer
+        isOpen={showDocumentViewer}
+        onClose={handleCloseDocumentViewer}
+        document={selectedDocument}
+      />
     </div>
   );
 };

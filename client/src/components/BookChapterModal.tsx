@@ -117,20 +117,6 @@ const BookChapterModal: React.FC<BookChapterModalProps> = ({
     onClose();
   };
 
-  // Reset form data
-  const handleReset = () => {
-    setFormData({
-      bookTitle: '',
-      chapterTitle: '',
-      authors: '',
-      editor: '',
-      isbn: '',
-      year: '',
-      publisherDetails: '',
-      description: ''
-    });
-    setErrors({});
-  };
 
   if (!isOpen) return null;
 
@@ -322,16 +308,6 @@ const BookChapterModal: React.FC<BookChapterModalProps> = ({
         </div>
 
         <div className="modal-footer">
-          <button
-            type="button"
-            className="book-chapter-btn book-chapter-btn-secondary"
-            onClick={handleReset}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-              <path d="M1 4V10H7M23 20V14H17M20.49 9A9 9 0 0 0 5.64 5.64L1 10M23 14L18.36 18.36A9 9 0 0 1 3.51 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            Reset
-          </button>
           <button
             type="button"
             className="faculty-modal-btn faculty-modal-btn-cancel"

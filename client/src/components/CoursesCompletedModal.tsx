@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import '../styles/components/MessageModal.css';
-import '../styles/components/SharedModal.css';
+import '../styles/components/CoursesCompletedModal.css';
 
-interface CoursesCompletedData {
-  id: number;
+interface CoursesCompletedFormData {
   courseTitle: string;
   startDate: string;
   endDate: string;
@@ -16,8 +14,8 @@ interface CoursesCompletedData {
 interface CoursesCompletedModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (data: CoursesCompletedData) => void;
-  editingItem?: CoursesCompletedData | null;
+  onSave: (data: CoursesCompletedFormData) => void;
+  editingItem?: CoursesCompletedFormData | null;
 }
 
 const CoursesCompletedModal: React.FC<CoursesCompletedModalProps> = ({
@@ -31,7 +29,8 @@ const CoursesCompletedModal: React.FC<CoursesCompletedModalProps> = ({
     startDate: '',
     endDate: '',
     duration: '',
-    platform: ''
+    platform: '',
+    uploadCertificate: ''
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
@@ -43,7 +42,8 @@ const CoursesCompletedModal: React.FC<CoursesCompletedModalProps> = ({
         startDate: editingItem.startDate,
         endDate: editingItem.endDate,
         duration: editingItem.duration,
-        platform: editingItem.platform
+        platform: editingItem.platform,
+        uploadCertificate: editingItem.uploadCertificate || ''
       });
     } else {
       setFormData({
@@ -51,7 +51,8 @@ const CoursesCompletedModal: React.FC<CoursesCompletedModalProps> = ({
         startDate: '',
         endDate: '',
         duration: '',
-        platform: ''
+        platform: '',
+        uploadCertificate: ''
       });
     }
     setErrors({});
@@ -91,13 +92,13 @@ const CoursesCompletedModal: React.FC<CoursesCompletedModalProps> = ({
       return;
     }
 
-    const newItem: CoursesCompletedData = {
-      id: editingItem ? editingItem.id : Date.now(),
+    const newItem: CoursesCompletedFormData = {
       courseTitle: formData.courseTitle,
       startDate: formData.startDate,
       endDate: formData.endDate,
       duration: formData.duration,
-      platform: formData.platform
+      platform: formData.platform,
+      uploadCertificate: formData.uploadCertificate
     };
 
     onSave(newItem);
@@ -110,16 +111,22 @@ const CoursesCompletedModal: React.FC<CoursesCompletedModalProps> = ({
       startDate: '',
       endDate: '',
       duration: '',
-      platform: ''
+      platform: '',
+      uploadCertificate: ''
     });
     setErrors({});
   };
+
+  console.log('CoursesCompletedModal render - isOpen:', isOpen, 'editingItem:', editingItem);
 
   if (!isOpen) return null;
 
   return createPortal(
     <div className="modal-overlay" onClick={onClose}>
       <div className="courses-completed-modal" onClick={(e) => e.stopPropagation()}>
+        <div style={{position: 'absolute', top: '10px', left: '10px', background: 'yellow', padding: '10px', zIndex: 10000}}>
+          DEBUG: Modal is rendering!
+        </div>
         <div className="courses-completed-modal-content">
           {/* Modal Header */}
           <div className="courses-completed-modal-header">
@@ -151,7 +158,7 @@ const CoursesCompletedModal: React.FC<CoursesCompletedModalProps> = ({
                     value={formData.courseTitle}
                     onChange={(e) => handleInputChange('courseTitle', e.target.value)}
                     placeholder="Enter course title"
-                    className={errors.courseTitle ? 'courses-completed-error' : ''}
+                    className={`courses-completed-input ${errors.courseTitle ? 'courses-completed-error' : ''}`}
                   />
                   <svg className="courses-completed-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none">
                     <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -171,7 +178,7 @@ const CoursesCompletedModal: React.FC<CoursesCompletedModalProps> = ({
                         type="date"
                         value={formData.startDate}
                         onChange={(e) => handleInputChange('startDate', e.target.value)}
-                        className={errors.startDate ? 'courses-completed-error' : ''}
+                        className={`courses-completed-input ${errors.startDate ? 'courses-completed-error' : ''}`}
                       />
                       <svg className="courses-completed-calendar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none">
                         <path d="M8 2V6M16 2V6M3 10H21M5 4H19C20.1046 4 21 4.89543 21 6V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V6C3 4.89543 3.89543 4 5 4Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -186,7 +193,7 @@ const CoursesCompletedModal: React.FC<CoursesCompletedModalProps> = ({
                         type="date"
                         value={formData.endDate}
                         onChange={(e) => handleInputChange('endDate', e.target.value)}
-                        className={errors.endDate ? 'courses-completed-error' : ''}
+                        className={`courses-completed-input ${errors.endDate ? 'courses-completed-error' : ''}`}
                       />
                       <svg className="courses-completed-calendar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none">
                         <path d="M8 2V6M16 2V6M3 10H21M5 4H19C20.1046 4 21 4.89543 21 6V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V6C3 4.89543 3.89543 4 5 4Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -205,7 +212,7 @@ const CoursesCompletedModal: React.FC<CoursesCompletedModalProps> = ({
                     value={formData.duration}
                     onChange={(e) => handleInputChange('duration', e.target.value)}
                     placeholder="Enter duration"
-                    className={errors.duration ? 'courses-completed-error' : ''}
+                    className={`courses-completed-input ${errors.duration ? 'courses-completed-error' : ''}`}
                   />
                   <svg className="courses-completed-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none">
                     <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
@@ -223,7 +230,7 @@ const CoursesCompletedModal: React.FC<CoursesCompletedModalProps> = ({
                     value={formData.platform}
                     onChange={(e) => handleInputChange('platform', e.target.value)}
                     placeholder="Enter platform"
-                    className={errors.platform ? 'courses-completed-error' : ''}
+                    className={`courses-completed-input ${errors.platform ? 'courses-completed-error' : ''}`}
                   />
                   <svg className="courses-completed-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none">
                     <rect x="2" y="3" width="20" height="14" rx="2" ry="2" stroke="currentColor" strokeWidth="2"/>

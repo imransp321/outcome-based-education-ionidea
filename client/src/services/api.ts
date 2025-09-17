@@ -300,16 +300,18 @@ export const configAPI = {
   awardsHonors: {
     getAll: (params?: any) => axiosInstance.get('/faculty/awards-honors', { params }),
     getById: (id: string) => axiosInstance.get(`/faculty/awards-honors/${id}`),
-    create: (data: any) => axiosInstance.post('/faculty/awards-honors', data),
-    update: (id: string, data: any) => axiosInstance.put(`/faculty/awards-honors/${id}`, data),
+    create: (data: FormData) => axiosInstance.post('/faculty/awards-honors', data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }),
+    update: (id: string, data: FormData) => axiosInstance.put(`/faculty/awards-honors/${id}`, data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }),
     delete: (id: string) => axiosInstance.delete(`/faculty/awards-honors/${id}`),
     uploadFile: (file: File) => {
       const formData = new FormData();
       formData.append('file', file);
       return axiosInstance.post('/faculty/awards-honors/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+        headers: { 'Content-Type': 'multipart/form-data' },
       });
     },
   },
@@ -449,6 +451,32 @@ export const configAPI = {
     },
   },
 
+  // Sponsored Projects
+  sponsoredProjects: {
+    getAll: (params?: any) => axiosInstance.get('/faculty/sponsored-projects', { params }),
+    getById: (id: string) => axiosInstance.get(`/faculty/sponsored-projects/${id}`),
+    create: (data: FormData) => axiosInstance.post('/faculty/sponsored-projects', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }),
+    update: (id: string, data: FormData) => axiosInstance.put(`/faculty/sponsored-projects/${id}`, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }),
+    delete: (id: string) => axiosInstance.delete(`/faculty/sponsored-projects/${id}`),
+    uploadFile: (file: File) => {
+      const formData = new FormData();
+      formData.append('file', file);
+      return axiosInstance.post('/faculty/sponsored-projects/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+    },
+  },
+
   // Research Publications
   researchPublications: {
     getAll: (params?: any) => axiosInstance.get('/faculty/research-publications', { params }),
@@ -497,6 +525,119 @@ export const configAPI = {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
+      });
+    },
+  },
+
+  // Journal Editorial
+  journalEditorial: {
+    getAll: (params?: any) => axiosInstance.get('/faculty/journal-editorial', { params }),
+    getById: (id: string) => axiosInstance.get(`/faculty/journal-editorial/${id}`),
+    create: (data: FormData) => axiosInstance.post('/faculty/journal-editorial', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }),
+    update: (id: string, data: FormData) => axiosInstance.put(`/faculty/journal-editorial/${id}`, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }),
+    delete: (id: string) => axiosInstance.delete(`/faculty/journal-editorial/${id}`),
+    uploadFile: (file: File) => {
+      const formData = new FormData();
+      formData.append('file', file);
+      return axiosInstance.post('/faculty/journal-editorial/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+    },
+  },
+
+  // Technical Talks
+  technicalTalks: {
+    getAll: (params?: any) => axiosInstance.get('/faculty/technical-talks', { params }),
+    getById: (id: string) => axiosInstance.get(`/faculty/technical-talks/${id}`),
+    create: (data: FormData) => axiosInstance.post('/faculty/technical-talks', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }),
+    update: (id: string, data: FormData) => axiosInstance.put(`/faculty/technical-talks/${id}`, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }),
+    delete: (id: string) => axiosInstance.delete(`/faculty/technical-talks/${id}`),
+    uploadFile: (file: File) => {
+      const formData = new FormData();
+      formData.append('file', file);
+      return axiosInstance.post('/faculty/technical-talks/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+    },
+  },
+
+  internshipTraining: {
+    getAll: (params?: any) => axiosInstance.get('/faculty/internship-training', { params }),
+    getById: (id: string) => axiosInstance.get(`/faculty/internship-training/${id}`),
+    create: (data: FormData) => axiosInstance.post('/faculty/internship-training', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }),
+    update: (id: string, data: FormData) => axiosInstance.put(`/faculty/internship-training/${id}`, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }),
+    delete: (id: string) => axiosInstance.delete(`/faculty/internship-training/${id}`),
+    uploadFile: (file: File) => {
+      const formData = new FormData();
+      formData.append('file', file);
+      return axiosInstance.post('/faculty/internship-training/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+    },
+  },
+  econtentDevelopment: {
+    getAll: (params?: any) => axiosInstance.get('/faculty/econtent-development', { params }),
+    getById: (id: string) => axiosInstance.get(`/faculty/econtent-development/${id}`),
+    create: (data: FormData) => axiosInstance.post('/faculty/econtent-development', data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }),
+    update: (id: string, data: FormData) => axiosInstance.put(`/faculty/econtent-development/${id}`, data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }),
+    delete: (id: string) => axiosInstance.delete(`/faculty/econtent-development/${id}`),
+    uploadFile: (file: File) => {
+      const formData = new FormData();
+      formData.append('file', file);
+      return axiosInstance.post('/faculty/econtent-development/upload', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+    },
+  },
+  coursesCompleted: {
+    getAll: (params?: any) => axiosInstance.get('/faculty/courses-completed', { params }),
+    getById: (id: string) => axiosInstance.get(`/faculty/courses-completed/${id}`),
+    create: (data: FormData) => axiosInstance.post('/faculty/courses-completed', data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }),
+    update: (id: string, data: FormData) => axiosInstance.put(`/faculty/courses-completed/${id}`, data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }),
+    delete: (id: string) => axiosInstance.delete(`/faculty/courses-completed/${id}`),
+    uploadFile: (file: File) => {
+      const formData = new FormData();
+      formData.append('file', file);
+      return axiosInstance.post('/faculty/courses-completed/upload', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
       });
     },
   },

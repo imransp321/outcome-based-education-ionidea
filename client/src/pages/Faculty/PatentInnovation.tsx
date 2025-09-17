@@ -78,7 +78,7 @@ const PatentInnovation: React.FC = () => {
   // Utility function to get the correct base URL for static files
   const getStaticBaseUrl = () => {
     const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
-    return apiUrl + '/faculty';
+    return apiUrl.replace('/api', '');
   };
 
   // Grid columns configuration
@@ -394,7 +394,7 @@ const PatentInnovation: React.FC = () => {
   const handleDocumentView = (item: PatentAPIResponse) => {
     if (item.upload_file) {
       setSelectedDocument({
-        url: `${getStaticBaseUrl()}/uploads/${item.upload_file}`,
+        url: `${getStaticBaseUrl()}/uploads/patent-innovation/${item.upload_file}`,
         name: item.upload_file
       });
       setShowDocumentViewer(true);

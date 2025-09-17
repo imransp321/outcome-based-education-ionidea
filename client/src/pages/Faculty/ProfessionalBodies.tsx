@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { configAPI } from '../../services/api';
 import { DataTable, Column } from '../../components/DataTable';
 import { Modal } from '../../components/Modal';
@@ -76,7 +76,6 @@ const ProfessionalBodies: React.FC = () => {
   const [fileName, setFileName] = useState<string>('');
   const [isDragOver, setIsDragOver] = useState(false);
   const [fileLoading, setFileLoading] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
   const [showDocumentViewer, setShowDocumentViewer] = useState(false);
   const [selectedDocument, setSelectedDocument] = useState<{ url: string; name: string } | null>(null);
 
@@ -115,31 +114,31 @@ const ProfessionalBodies: React.FC = () => {
     { 
       key: 'organization_name', 
       title: 'Organization Name', 
-      width: '35%',
+      width: '30%',
       render: (value) => truncateText(value, 30)
     },
     { 
       key: 'membership_type', 
       title: 'Membership Type', 
-      width: '20%',
+      width: '15%',
       render: (value) => truncateText(value, 20)
     },
     { 
       key: 'membership_no', 
       title: 'Membership No.', 
-      width: '20%',
+      width: '15%',
       render: (value) => truncateText(value, 15)
     },
     { 
       key: 'date', 
       title: 'Date', 
-      width: '15%',
+      width: '12%',
       render: (value) => new Date(value).toLocaleDateString()
     },
     { 
       key: 'upload_file', 
       title: 'Document', 
-      width: '10%',
+      width: '13%',
       render: (value, record) => (
         value ? (
           <Button
@@ -153,6 +152,29 @@ const ProfessionalBodies: React.FC = () => {
           <span style={{ color: '#6c757d' }}>No file</span>
         )
       )
+    },
+    {
+      key: 'actions',
+      title: 'Actions',
+      width: '15%',
+      render: (value, record) => (
+        <div style={{ display: 'flex', gap: '8px' }}>
+          <Button
+            size="small"
+            variant="outline"
+            onClick={() => handleEdit(record)}
+          >
+            Edit
+          </Button>
+          <Button
+            size="small"
+            variant="danger"
+            onClick={() => handleDelete(record.id)}
+          >
+            Delete
+          </Button>
+        </div>
+      )
     }
   ];
 
@@ -165,17 +187,27 @@ const ProfessionalBodies: React.FC = () => {
   const fetchData = async (page: number = 1, search: string = '') => {
     setLoading(true);
     try {
-      const response = await configAPI.getProfessionalBodies(page, search);
-      setData(response.data || []);
-      setPagination(prev => ({
-        ...prev,
-        currentPage: page,
-        totalPages: response.data?.totalPages || 1,
-        totalItems: response.data?.totalCount || 0,
-        showPagination: (response.data?.totalCount || 0) > 10
-      }));
+      const response = await configAPI.professionalBodies.getAll({ page, search });
+      const responseData = response.data;
+      
+      // Handle the API response structure: { success: true, data: [...], pagination: {...} }
+      if (responseData.success && Array.isArray(responseData.data)) {
+        setData(responseData.data);
+        setPagination(prev => ({
+          ...prev,
+          currentPage: page,
+          totalPages: responseData.pagination?.totalPages || 1,
+          totalItems: responseData.pagination?.totalCount || 0,
+          showPagination: (responseData.pagination?.totalCount || 0) > 10
+        }));
+      } else {
+        console.error('Invalid API response structure:', responseData);
+        setData([]);
+        setMessage({ type: 'error', text: 'Invalid data format received from server' });
+      }
     } catch (error) {
       console.error('Error fetching data:', error);
+      setData([]);
       setMessage({ type: 'error', text: 'Failed to fetch data' });
     } finally {
       setLoading(false);
@@ -219,14 +251,14 @@ const ProfessionalBodies: React.FC = () => {
       formDataToSend.append('description', formData.description);
 
       if (selectedFile) {
-        formDataToSend.append('upload_file', selectedFile);
+        formDataToSend.append('uploadFile', selectedFile);
       }
 
       let response;
       if (editingId) {
-        response = await configAPI.updateProfessionalBody(editingId.toString(), formDataToSend);
+        response = await configAPI.professionalBodies.update(editingId.toString(), formDataToSend);
       } else {
-        response = await configAPI.createProfessionalBody(formDataToSend);
+        response = await configAPI.professionalBodies.create(formDataToSend);
       }
 
       if (response.status === 200 || response.status === 201) {
@@ -269,18 +301,30 @@ const ProfessionalBodies: React.FC = () => {
     setShowAccordion(true);
   };
 
+  // Utility function to convert ISO date to yyyy-MM-dd format
+  const formatDateForInput = (dateString: string): string => {
+    if (!dateString) return '';
+    try {
+      const date = new Date(dateString);
+      return date.toISOString().split('T')[0];
+    } catch (error) {
+      console.error('Error formatting date:', error);
+      return dateString;
+    }
+  };
+
   // Handle edit
   const handleEdit = (item: ProfessionalBodiesAPIResponse) => {
     setFormData({
       organizationName: item.organization_name,
       membershipType: item.membership_type,
       membershipNo: item.membership_no,
-      date: item.date,
+      date: formatDateForInput(item.date),
       description: item.description || '',
       upload_file: item.upload_file || ''
     });
     setEditingId(item.id);
-    setExistingFile(item.upload_file ? `${getStaticBaseUrl()}/uploads/${item.upload_file}` : null);
+    setExistingFile(item.upload_file ? `${getStaticBaseUrl()}/uploads/professional-bodies/${item.upload_file}` : null);
     setFileName(item.upload_file || '');
     setShowAccordion(true);
   };
@@ -289,7 +333,7 @@ const ProfessionalBodies: React.FC = () => {
   const handleDelete = async (id: number) => {
     if (window.confirm('Are you sure you want to delete this professional body?')) {
       try {
-        const response = await configAPI.deleteProfessionalBody(id.toString());
+        const response = await configAPI.professionalBodies.delete(id.toString());
         if (response.status === 200) {
           setMessage({ type: 'success', text: 'Professional body deleted successfully!' });
           fetchData();
@@ -324,13 +368,33 @@ const ProfessionalBodies: React.FC = () => {
     setExistingFile(null);
   };
 
-  const handleFileUploadClick = () => {
-    fileInputRef.current?.click();
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOver(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOver(false);
+    
+    const files = e.dataTransfer.files;
+    if (files && files.length > 0) {
+      handleFileSelect(files[0]);
+    }
   };
 
   const handleViewDocument = (fileName: string) => {
     const documentInfo = {
-      url: `${getStaticBaseUrl()}/uploads/${fileName}`,
+      url: `${getStaticBaseUrl()}/uploads/professional-bodies/${fileName}`,
       name: fileName
     };
     
@@ -508,10 +572,10 @@ const ProfessionalBodies: React.FC = () => {
                 isDragOver={isDragOver}
                 onFileSelect={handleFileSelect}
                 onFileDelete={handleFileDelete}
-                onUploadClick={handleFileUploadClick}
-                onDragOver={(e) => setIsDragOver(true)}
-                onDragLeave={(e) => setIsDragOver(false)}
-                onDrop={(e) => setIsDragOver(false)}
+                onUploadClick={() => {}}
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
                 accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
                 maxSize={5}
               />

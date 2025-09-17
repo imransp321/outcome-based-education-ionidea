@@ -331,6 +331,18 @@ const ResearchProjects: React.FC = () => {
   };
 
   // Handle edit
+  // Utility function to convert ISO date to yyyy-MM-dd format
+  const formatDateForInput = (dateString: string): string => {
+    if (!dateString) return '';
+    try {
+      const date = new Date(dateString);
+      return date.toISOString().split('T')[0];
+    } catch (error) {
+      console.error('Error formatting date:', error);
+      return dateString;
+    }
+  };
+
   const handleEdit = (item: ResearchProjectsAPIResponse) => {
     setFormData({
       projectTitle: item.project_title,
@@ -338,7 +350,7 @@ const ResearchProjects: React.FC = () => {
       teamMembers: item.team_members || '',
       status: item.status,
       collaboration: item.collaboration || '',
-      sanctionedDate: item.sanctioned_date,
+      sanctionedDate: formatDateForInput(item.sanctioned_date),
       amountSanctioned: item.amount_sanctioned,
       duration: item.duration,
       fundingAgency: item.funding_agency,
@@ -346,10 +358,10 @@ const ResearchProjects: React.FC = () => {
       outcome: item.outcome || '',
       uploadFile: item.upload_file || ''
     });
-    setExistingFile(item.upload_file || null);
+    setExistingFile(item.upload_file ? `${getStaticBaseUrl()}/uploads/research-projects/${item.upload_file}` : null);
     setFilePreview(null);
     setSelectedFile(null);
-    setFileName('');
+    setFileName(item.upload_file || '');
     setEditingId(item.id);
     setShowAccordion(true);
   };
@@ -451,7 +463,7 @@ const ResearchProjects: React.FC = () => {
       return;
     }
 
-    const documentUrl = `${getStaticBaseUrl()}/api/faculty/uploads/${item.upload_file}`;
+    const documentUrl = `${getStaticBaseUrl()}/uploads/research-projects/${item.upload_file}`;
     const documentInfo = {
       url: documentUrl,
       name: item.upload_file
@@ -977,7 +989,7 @@ const ResearchProjects: React.FC = () => {
                                 </svg>
                               </div>
                               <div className="book-chapter-file-info">
-                                <span className="book-chapter-file-name">{filePreview || existingFile}</span>
+                                <span className="book-chapter-file-name">{fileName || (existingFile ? existingFile.split('/').pop() : 'Unknown file')}</span>
                                 <button
                                   type="button"
                                   className="book-chapter-btn book-chapter-btn-sm book-chapter-btn-danger"

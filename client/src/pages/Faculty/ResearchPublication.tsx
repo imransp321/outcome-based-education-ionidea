@@ -233,6 +233,7 @@ const ResearchPublication: React.FC = () => {
   // File handling functions (replicated from Professional Bodies)
   const handleFileSelect = (file: File) => {
     setSelectedFile(file);
+    setFileName(file.name);
     setExistingFile(null);
     
     if (file.type.startsWith('image/')) {
@@ -268,7 +269,7 @@ const ResearchPublication: React.FC = () => {
       return;
     }
 
-    const documentUrl = `${getStaticBaseUrl()}/api/faculty/uploads/${item.upload_file}`;
+    const documentUrl = `${getStaticBaseUrl()}/uploads/research-publications/${item.upload_file}`;
     const documentInfo = {
       url: documentUrl,
       name: item.upload_file
